@@ -19,3 +19,7 @@ dependencies {
 war {
     exclude 'bower.json'
 }
+
+war.doLast {
+    ant.unzip(src: war.archivePath, dest: "$buildDir/exploded")
+}
