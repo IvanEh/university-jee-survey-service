@@ -38,6 +38,7 @@ public class Question {
 
     public void setQuestionnaire(Questionnaire questionnaire) {
         this.questionnaire = questionnaire;
+        this.questionnaire.getQuestions().add(this);
     }
 
     public boolean isRequired() {

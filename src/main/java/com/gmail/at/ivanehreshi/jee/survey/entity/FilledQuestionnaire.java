@@ -46,5 +46,6 @@ public class FilledQuestionnaire {
 
     public void setSurvey(Survey survey) {
         this.survey = survey;
+        this.survey.getFilledQuestionnaires().add(this);
     }
 }

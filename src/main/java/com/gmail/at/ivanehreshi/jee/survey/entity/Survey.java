@@ -22,13 +22,15 @@ public class Survey {
     private boolean closed;
 
     @OneToMany(mappedBy = "survey")
-    private List<FilledQuestionnaire> questionnaires;
+    private List<FilledQuestionnaire> filledQuestionnaires;
 
     public Survey() {
     }
 
     public Survey(Questionnaire questionnaire, Date startDate, Date endDate, boolean closed) {
         this.questionnaire = questionnaire;
+        this.questionnaire.getSurveys().add(this);
+
         this.startDate = startDate;
         this.endDate = endDate;
         this.closed = closed;
@@ -64,14 +66,15 @@ public class Survey {
 
     public void setQuestionnaire(Questionnaire questionnaire) {
         this.questionnaire = questionnaire;
+        this.questionnaire.getSurveys().add(this);
     }
 
-    public List<FilledQuestionnaire> getQuestionnaires() {
-        return questionnaires;
+    public List<FilledQuestionnaire> getFilledQuestionnaires() {
+        return filledQuestionnaires;
     }
 
-    public void setQuestionnaires(List<FilledQuestionnaire> questionnaires) {
-        this.questionnaires = questionnaires;
+    public void setFilledQuestionnaires(List<FilledQuestionnaire> filledQuestionnaires) {
+        this.filledQuestionnaires = filledQuestionnaires;
     }
 
     public Date getStartDate() {

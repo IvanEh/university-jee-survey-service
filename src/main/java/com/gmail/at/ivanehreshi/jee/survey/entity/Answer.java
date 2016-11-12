@@ -22,6 +22,7 @@ class Answer {
     public Answer(String answer, FilledQuestionnaire filledQuestionnaire, Question question) {
         this.answer = answer;
         this.filledQuestionnaire = filledQuestionnaire;
+        this.filledQuestionnaire.getAnswers().add(this);
         this.question = question;
     }
 
@@ -43,6 +44,7 @@ class Answer {
 
     public void setFilledQuestionnaire(FilledQuestionnaire filledQuestionnaire) {
         this.filledQuestionnaire = filledQuestionnaire;
+        this.filledQuestionnaire.getAnswers().add(this);
     }
 
     public Long getId() {

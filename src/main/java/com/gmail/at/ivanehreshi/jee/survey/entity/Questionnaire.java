@@ -15,12 +15,20 @@ public class Questionnaire {
     @OneToMany(mappedBy = "questionnaire")
     private Set<Question> questions;
 
+    @OneToMany(mappedBy = "questionnaire")
+    private Set<Survey> surveys;
+
     public Questionnaire() {
     }
 
     public Questionnaire(String description, String name) {
         this.description = description;
         this.name = name;
+    }
+
+    public void addQuestion(Question question) {
+        questions.add(question);
+        question.setQuestionnaire(this);
     }
 
     public String getDescription() {
@@ -53,5 +61,13 @@ public class Questionnaire {
 
     public void setQuestions(Set<Question> questions) {
         this.questions = questions;
+    }
+
+    public Set<Survey> getSurveys() {
+        return surveys;
+    }
+
+    public void setSurveys(Set<Survey> surveys) {
+        this.surveys = surveys;
     }
 }
