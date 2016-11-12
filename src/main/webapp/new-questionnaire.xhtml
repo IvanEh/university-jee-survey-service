@@ -11,6 +11,7 @@
     <title>Title</title>
     <h:outputStylesheet library="bower_components" name="bootstrap/dist/css/bootstrap.css"/>
     <h:outputStylesheet library="css" name="master.css"/>
+    <h:outputScript library="js" name="master.js"/>
 </h:head>
 
 <h:body>
@@ -46,7 +47,7 @@
 
                 <div class="input-group">
                     <span class="input-group-addon long-addon">Опис опитування</span>
-                    <textarea class="form-control" rows="2" id="comment"></textarea>
+                    <h:inputTextarea class="form-control" rows="2" id="comment"></h:inputTextarea>
                 </div>
 
                 <hr></hr>
@@ -55,24 +56,33 @@
 
                 <div class="question-container panel panel-default">
                     <div class="panel-heading">
-                        <h5><span class="badge">1</span>Question 1</h5>
+                        <span class="badge question-num ">1</span>
+                        <input type="text" class="form-control" value="Question 1"/>
                     </div>
+
                     <div class="panel-body">
                         <div class="radio">
-                            <label><input type="radio" name="optradio"/>Option 1</label>
+                            <label><input type="radio" name="optradio"/>
+                                <input type="text" class="form-control" value="Question 1"/>
+                            </label>
                         </div>
                         <div class="radio">
-                            <label><input type="radio" name="optradio"/>Option 2</label>
+                            <label><input type="radio" name="optradio"/>
+                                <input type="text" class="form-control" value="Question 1"/>
+                            </label>
                         </div>
-                        <div class="radio disabled">
-                            <label><input type="radio" name="optradio"/>Option 3</label>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio"/>
+                                <input type="text" class="form-control" value="Question 1"/>
+                            </label>
                         </div>
                     </div>
                 </div>
 
                 <div class="question-container panel panel-default">
                     <div class="panel-heading">
-                        <h5><span class="badge">2</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h5>
+                        <span class="badge question-num ">2</span>
+                        <input type="text" class="form-control" value="Question 1"/>
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
@@ -98,6 +108,7 @@
         Зберегти
     </div>
 
+    <h:outputScript library="bower_components" name="jquery/dist/jquery.js"/>
 
 </h:body>
 </html>
