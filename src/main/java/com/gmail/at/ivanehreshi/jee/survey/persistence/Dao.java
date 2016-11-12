@@ -1,4 +1,4 @@
-package com.gmail.at.ivanehreshi.jee.vacancy.persistence;
+package com.gmail.at.ivanehreshi.jee.survey.persistence;
 
 import java.io.Serializable;
 import java.util.List;
