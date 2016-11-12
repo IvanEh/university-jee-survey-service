@@ -1,0 +1,21 @@
+apply plugin:'java'
+apply plugin:'war'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "mysql:mysql-connector-java:5.1.30"
+    compile "javax.servlet:jstl:1.2"
+    compile "javax.servlet:javax.servlet-api:3.1.0"
+    compile "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final"
+    compile "javax.faces:jsf-api:2.1"
+}
+
+
+war {
+    exclude 'bower.json'
+}
