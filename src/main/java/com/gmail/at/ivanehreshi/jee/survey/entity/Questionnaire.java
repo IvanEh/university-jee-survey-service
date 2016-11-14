@@ -31,6 +31,11 @@ public class Questionnaire {
         question.setQuestionnaire(this);
     }
 
+    public void removeQuestion(Question q) {
+        q.setQuestionnaire(null);
+        questions.remove(q);
+    }
+
     public String getDescription() {
         return description;
     }

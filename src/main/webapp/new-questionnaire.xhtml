@@ -66,11 +66,19 @@
                             </span>
                             <h:inputText styleClass="form-control" value="${question.title}" />
                         </div>
+
                         <div class="panel-body">
                             <div class="form-group">
-                                <input class="form-control answer-text" placeholder="Jane Doe"/>
+                                <input class="form-control answer-text" placeholder=""/>
+                            </div>
+
+                            <div class="btn-container pull-right">
+                                <h:commandButton styleClass="btn" value="Видалити" action="#{questionnaireCreatorService.removeQuestion(question)}">
+                                    <f:ajax render="@form" execute="@form"/>
+                                </h:commandButton>
                             </div>
                         </div>
+
                     </h:panelGroup>
 
                     <h:panelGroup layout="block" styleClass="question-container panel panel-default" rendered="${questionnaireCreatorService.isChoiceQuestion(question)}">
@@ -93,6 +101,9 @@
                             </ui:repeat>
 
                             <div class="btn-container pull-right">
+                                <h:commandButton styleClass="btn" value="Видалити" action="#{questionnaireCreatorService.removeQuestion(question)}">
+                                    <f:ajax render="@form" execute="@form"/>
+                                </h:commandButton>
                                 <h:commandButton styleClass="btn" value="+" action="#{questionnaireCreatorService.addChoice(choiceQuestion)}">
                                     <f:ajax render="@form" execute="@form"/>
                                 </h:commandButton>

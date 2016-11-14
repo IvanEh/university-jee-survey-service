@@ -39,7 +39,7 @@ public class Question {
 
     public void setQuestionnaire(Questionnaire questionnaire) {
         this.questionnaire = questionnaire;
-        if(!questionnaire.getQuestions().contains(this)) {
+        if(questionnaire != null && !questionnaire.getQuestions().contains(this)) {
             this.questionnaire.getQuestions().add(this);
         }
     }

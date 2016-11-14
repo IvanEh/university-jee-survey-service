@@ -30,6 +30,11 @@ public class QuestionnaireCreatorService {
         choiceQuestion.getChoices().add("");
     }
 
+    public void removeQuestion(Question q) {
+        System.out.println("remove q");
+        questionnaire.removeQuestion(q);
+    }
+
     public boolean isTextQuestion(Question question) {
         return question.getClass().equals(TextQuestion.class);
     }
