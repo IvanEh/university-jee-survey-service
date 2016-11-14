@@ -19,23 +19,13 @@
 
 <h:body>
 
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-                    Survey Service
-                </a>
-            </div>
-        </div>
-    </nav>
+    <ui:include src="components/navbar.xhtml"/>
 
     <div class="container-fluid">
-        <div class="col-md-2 ">
-            <ul class="nav nav-pills nav-stacked">
-                <li><a href="">Home</a></li>
-                <li class="active"><a href="">New Questionnaire</a></li>
-            </ul>
-        </div>
+
+        <ui:include src="components/sidebar.xhtml">
+            <ui:param name="link" value="2" />
+        </ui:include>
 
         <h:form id="form">
         <div class="col-md-8 content">
