@@ -14,7 +14,7 @@ public abstract class JpaDao<T, PK> implements Dao<T, PK> {
     private final Class<T> clazz;
 
     @PersistenceUnit(unitName = "survey-em")
-    EntityManagerFactory emf;
+    private EntityManagerFactory emf;
 
     public JpaDao(Class<T> type) {
         this.clazz = type;
@@ -23,11 +23,9 @@ public abstract class JpaDao<T, PK> implements Dao<T, PK> {
     @Override
     public PK create(T t) {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
 
         em.persist(t);
 
-        em.getTransaction().commit();
         em.close();
 
         return null;
@@ -36,11 +34,9 @@ public abstract class JpaDao<T, PK> implements Dao<T, PK> {
     @Override
     public T read(PK id) {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
 
         T t = em.find(clazz, id);
 
-        em.getTransaction().commit();
         em.close();
 
         return t;
@@ -49,29 +45,24 @@ public abstract class JpaDao<T, PK> implements Dao<T, PK> {
     @Override
     public void update(T t) {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
 
         em.merge(t);
 
-        em.getTransaction().commit();
         em.close();
     }
 
     @Override
     public void delete(PK id) {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
 
         em.remove(em.getReference(clazz, id));
 
-        em.getTransaction().commit();
         em.close();
     }
 
     @Override
     public List<T> findAll() {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
 
         CriteriaBuilder cb  = em.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = cb.createQuery(clazz);
@@ -80,7 +71,6 @@ public abstract class JpaDao<T, PK> implements Dao<T, PK> {
 
         List<T> entities = em.createQuery(criteriaQuery).getResultList();
 
-        em.getTransaction().commit();
         em.close();
 
         return entities;
@@ -98,4 +88,3 @@ public abstract class JpaDao<T, PK> implements Dao<T, PK> {
         this.emf = emf;
     }
 }
-

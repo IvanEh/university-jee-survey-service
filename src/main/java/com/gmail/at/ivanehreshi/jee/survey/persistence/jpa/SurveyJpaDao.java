@@ -2,6 +2,9 @@ package com.gmail.at.ivanehreshi.jee.survey.persistence.jpa;
 
 import com.gmail.at.ivanehreshi.jee.survey.entity.Survey;
 
+import javax.ejb.Stateless;
+
+@Stateless
 public class SurveyJpaDao extends JpaDao<Survey, Long>{
     public SurveyJpaDao() {
         super(Survey.class);
