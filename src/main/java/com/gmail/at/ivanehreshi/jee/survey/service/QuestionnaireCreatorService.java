@@ -31,7 +31,6 @@ public class QuestionnaireCreatorService {
     }
 
     public void removeQuestion(Question q) {
-        System.out.println("remove q");
         questionnaire.removeQuestion(q);
     }
 
@@ -51,9 +50,10 @@ public class QuestionnaireCreatorService {
         return (TextQuestion) textQuestion;
     }
 
-    public void save() {
+    public String save() {
         System.out.println(questionnaire.getQuestions().size());
         questionnaireJpaDao.create(questionnaire);
+        return "questionnaire-created?faces-redirect=true&id=" + questionnaire.getId();
     }
 
     public List<Question> getQuestions() {
