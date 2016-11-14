@@ -1,22 +1,22 @@
 package com.gmail.at.ivanehreshi.jee.survey.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.Set;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Questionnaire {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "questionnaire")
-    private Set<Question> questions;
+    @OneToMany(mappedBy = "questionnaire", cascade = CascadeType.ALL)
+    private List<Question> questions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "questionnaire")
-    private Set<Survey> surveys;
+    @OneToMany(mappedBy = "questionnaire", cascade = CascadeType.ALL)
+    private List<Survey> surveys = new ArrayList<>();
 
     public Questionnaire() {
     }
@@ -55,19 +55,19 @@ public class Questionnaire {
         this.name = name;
     }
 
-    public Set<Question> getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(Set<Question> questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
 
-    public Set<Survey> getSurveys() {
+    public List<Survey> getSurveys() {
         return surveys;
     }
 
-    public void setSurveys(Set<Survey> surveys) {
+    public void setSurveys(List<Survey> surveys) {
         this.surveys = surveys;
     }
 }

@@ -1,13 +1,13 @@
 package com.gmail.at.ivanehreshi.jee.survey.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class FilledQuestionnaire {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 
@@ -15,7 +15,7 @@ public class FilledQuestionnaire {
     private Survey survey;
 
     @OneToMany(mappedBy = "filledQuestionnaire")
-    private List<Answer> answers;
+    private List<Answer> answers = new ArrayList<>();
 
     public FilledQuestionnaire() {
     }

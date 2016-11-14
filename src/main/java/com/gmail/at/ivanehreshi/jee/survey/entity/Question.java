@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Question {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 
@@ -12,7 +13,7 @@ public class Question {
 
     private boolean required;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Questionnaire questionnaire;
 
     public Question() {
@@ -38,7 +39,9 @@ public class Question {
 
     public void setQuestionnaire(Questionnaire questionnaire) {
         this.questionnaire = questionnaire;
-        this.questionnaire.getQuestions().add(this);
+        if(!questionnaire.getQuestions().contains(this)) {
+            this.questionnaire.getQuestions().add(this);
+        }
     }
 
     public boolean isRequired() {
