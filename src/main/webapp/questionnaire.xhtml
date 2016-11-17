@@ -21,8 +21,6 @@
 
 </h:head>
 <h:body>
-    <h:outputText value="${questionnaireFillerService.updateTarget(2)}"/>
-
     <ui:include src="components/navbar.xhtml"/>
 
     <div class="container-fluid">
@@ -30,7 +28,7 @@
         <ui:include src="components/sidebar.xhtml">
         </ui:include>
 
-        <h:form id="form">
+        <h:form id="form" rendered="#{questionnaireFillerService.isValidTest()}">
             <div class="col-md-8 content">
                 <h1><h:outputText value="${questionnaireFillerService.questionnaire.name}"/></h1>
 
@@ -60,6 +58,7 @@
                                     <h:inputText styleClass="form-control answer-text" value="${answer.answer}" />
                                 </div>
                             </div>
+
                         </h:panelGroup>
 
 
