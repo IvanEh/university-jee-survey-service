@@ -8,10 +8,13 @@ import com.gmail.at.ivanehreshi.jee.survey.persistence.jpa.FilledQuestionnaireDa
 import com.gmail.at.ivanehreshi.jee.survey.persistence.jpa.QuestionJpaDao;
 import com.gmail.at.ivanehreshi.jee.survey.persistence.jpa.QuestionnaireJpaDao;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import java.util.List;
+import java.util.Map;
 
 @ViewScoped
 @ManagedBean
@@ -25,7 +28,7 @@ public class QuestionnaireFillerService {
     @EJB
     private QuestionJpaDao questionDao;
 
-    private Long targetQuestionnaire = 4L;
+    private Long targetQuestionnaire;
 
     private List<Question> questions;
 
@@ -34,6 +37,11 @@ public class QuestionnaireFillerService {
     private FilledQuestionnaire filledQuestionnaire;
 
     public QuestionnaireFillerService() {
+    }
+
+    @PostConstruct
+    public void initBean() {
+        updateTarget(getTargetQuestionnaire());
     }
 
     private void init() {
@@ -45,26 +53,34 @@ public class QuestionnaireFillerService {
 
     public void updateTarget(Long id) {
         targetQuestionnaire = id;
+
+        if(id == null)
+            return;
+
         init();
+    }
+
+    public boolean isValidTest() {
+        return targetQuestionnaire != null;
     }
 
     private void initFilledQuestionnaire() {
         filledQuestionnaire.setQuestionnaire(new Questionnaire(targetQuestionnaire));
 
-        System.out.println("q.size = " + getQuestions().size());
         for (Question q : getQuestions()) {
             filledQuestionnaire.addAnswer(q.newAnswer());
         }
-        System.out.println("filledQuestionnaire.answer.size() " + filledQuestionnaire.getAnswers().size());
     }
 
-    public void save() {
-        System.out.println("save begin");
-        System.out.println(filledQuestionnaire.getAnswers());
-        System.out.println("length: " + filledQuestionnaire.getAnswers().size());
-        System.out.println(filledQuestionnaire.getQuestionnaire().getQuestions());
+    public String save() {
         filledQuestionnaireDao.create(filledQuestionnaire);
-        System.out.println("save end");
+        return "questionnaire-success?faces-redirect=true";
+    }
+
+    private Long getTargetQuestionnaire() {
+        Map<String, String> requestParameterMap = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String s = requestParameterMap.get("q") ;
+        return s == null ? null : Long.valueOf(s);
     }
 
     public List<Answer> getAnswers() {
