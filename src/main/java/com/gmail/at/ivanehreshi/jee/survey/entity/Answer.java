@@ -1,10 +1,11 @@
 package com.gmail.at.ivanehreshi.jee.survey.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-class Answer {
+public class Answer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
@@ -45,7 +46,13 @@ class Answer {
 
     public void setFilledQuestionnaire(FilledQuestionnaire filledQuestionnaire) {
         this.filledQuestionnaire = filledQuestionnaire;
-        this.filledQuestionnaire.getAnswers().add(this);
+
+        if(Objects.isNull(filledQuestionnaire))
+            return;
+
+        if(!this.filledQuestionnaire.getAnswers().contains(this)) {
+            this.filledQuestionnaire.getAnswers().add(this);
+        }
     }
 
     public Long getId() {
@@ -62,5 +69,15 @@ class Answer {
 
     public void setQuestion(Question question) {
         this.question = question;
+    }
+
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "answer='" + answer + '\'' +
+                ", id=" + id +
+                ", question=" + question.getId() +
+                ", filledQuestionnaire " + filledQuestionnaire.getId() +
+                '}';
     }
 }

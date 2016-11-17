@@ -3,6 +3,7 @@ package com.gmail.at.ivanehreshi.jee.survey.entity;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -12,16 +13,21 @@ public class FilledQuestionnaire {
     private Long id;
 
     @ManyToOne
-    private Survey survey;
+    private Questionnaire questionnaire;
 
-    @OneToMany(mappedBy = "filledQuestionnaire")
+    @OneToMany(mappedBy = "filledQuestionnaire", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Answer> answers = new ArrayList<>();
 
     public FilledQuestionnaire() {
     }
 
-    public FilledQuestionnaire(Survey survey) {
-        this.survey = survey;
+    public FilledQuestionnaire(Questionnaire questionnaire) {
+        this.questionnaire = questionnaire;
+    }
+
+    public void addAnswer(Answer a) {
+        answers.add(a);
+        a.setFilledQuestionnaire(this);
     }
 
     public List<Answer> getAnswers() {
@@ -40,12 +46,26 @@ public class FilledQuestionnaire {
         this.id = id;
     }
 
-    public Survey getSurvey() {
-        return survey;
+    public Questionnaire getQuestionnaire() {
+        return questionnaire;
     }
 
-    public void setSurvey(Survey survey) {
-        this.survey = survey;
-        this.survey.getFilledQuestionnaires().add(this);
+    public void setQuestionnaire(Questionnaire questionnaire) {
+        this.questionnaire = questionnaire;
+
+        if(Objects.isNull(questionnaire))
+            return;
+
+        if(!questionnaire.getFilledQuestionnaires().contains(this)) {
+            questionnaire.getFilledQuestionnaires().add(this);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "FilledQuestionnaire{" +
+                "id=" + id +
+                ", questionnaire=" + questionnaire.getId() +
+                '}';
     }
 }

@@ -12,13 +12,17 @@ public class Questionnaire {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "questionnaire", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "questionnaire", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Question> questions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "questionnaire", cascade = CascadeType.ALL)
-    private List<Survey> surveys = new ArrayList<>();
+    @OneToMany(mappedBy = "questionnaire", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FilledQuestionnaire> filledQuestionnaires = new ArrayList<>();
 
     public Questionnaire() {
+    }
+
+    public Questionnaire(Long id) {
+        this.id = id;
     }
 
     public Questionnaire(String description, String name) {
@@ -68,11 +72,19 @@ public class Questionnaire {
         this.questions = questions;
     }
 
-    public List<Survey> getSurveys() {
-        return surveys;
+    public List<FilledQuestionnaire> getFilledQuestionnaires() {
+        return filledQuestionnaires;
     }
 
-    public void setSurveys(List<Survey> surveys) {
-        this.surveys = surveys;
+    public void setFilledQuestionnaires(List<FilledQuestionnaire> filledQuestionnaires) {
+        this.filledQuestionnaires = filledQuestionnaires;
+    }
+
+    @Override
+    public String toString() {
+        return "Questionnaire{" +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

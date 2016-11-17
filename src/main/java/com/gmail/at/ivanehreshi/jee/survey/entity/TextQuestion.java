@@ -10,4 +10,11 @@ public class TextQuestion extends Question {
     public TextQuestion(String title, int maxLength, Questionnaire questionnaire, boolean required) {
         super(title, questionnaire, required);
     }
+
+    @Override
+    public Answer newAnswer() {
+        Answer answer = new TextQuestionAnswer();
+        answer.setQuestion(this);
+        return answer;
+    }
 }

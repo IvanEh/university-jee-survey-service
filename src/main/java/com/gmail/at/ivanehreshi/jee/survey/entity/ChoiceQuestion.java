@@ -8,8 +8,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class ChoiceQuestion extends Question {
 
-    @ElementCollection
-    @OrderColumn
+    @ElementCollection(fetch = FetchType.EAGER)
     public List<String> choices = new ArrayList<>();
 
     public ChoiceQuestion() {
@@ -21,6 +20,13 @@ public class ChoiceQuestion extends Question {
 
     public void setChoices(List<String> choices) {
         this.choices = choices;
+    }
+
+    @Override
+    public Answer newAnswer() {
+        Answer answer = new ChoiceQuestionAnswer();
+        answer.setQuestion(this);
+        return answer;
     }
 }
 

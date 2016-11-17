@@ -59,4 +59,20 @@ public class Question {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public Answer newAnswer() {
+        Answer answer = new Answer();
+        answer.setQuestion(this);
+        return answer;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "questionnaire=" + questionnaire.getId() +
+                ", id=" + id +
+                ", required=" + required +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }
