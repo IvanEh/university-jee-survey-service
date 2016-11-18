@@ -4,6 +4,7 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xsi:schemaLocation="http://xmlns.jcp.org/jsf/html http://xmlns.jcp.org/ns/jsf/html"
@@ -13,6 +14,7 @@
     <!--<h:outputStylesheet library="bower_components" name="bootstrap/dist/css/bootstrap.css"/>-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <h:outputStylesheet library="css" name="master.css"/>
+    <h:outputStylesheet library="css" name="user.css"/>
     <h:outputScript library="bower_components" name="jquery/dist/jquery.js"/>
     <h:outputScript library="js" name="master.js"/>
     <h:outputScript library="js" name="questionnaire.js"/>
@@ -30,25 +32,35 @@
                       id="content">
             <h1>Персональна сторінка</h1>
             <p>
-                <strong>username: </strong> username
+                <strong>username: </strong> #{userQuestionnairesService.user.username}
             </p>
             <p>
-                Ivan Ehreshi
+                #{userQuestionnairesService.user.firstName} #{userQuestionnairesService.user.lastName}
             </p>
 
             <hr/>
 
-            <h:panelGroup id="questionnaires">
+            <h:panelGroup id="questionnaires" styleClass="col-md-9">
                 <ul>
-                   <li>
-                        <div>
+                    <ui:repeat value="#{userQuestionnairesService.questionnaires}" var="questionnaire" varStatus="it">
+                        <li>
                             <div>
-                                <a href="#" class="underlined-link">Oppytuvannya</a>
-                                <span class="badge">10</span>
-                                <a href="#" class="btn btn-default btn-behav-danger">delete</a>
+                                <a href="#" class="underlined-link">#{questionnaire.name}</a>
+                                <span class="badge">#{userQuestionnairesService.countFilledQuestionnaires(questionnaire)}</span>
+                                <h:form style="display: inline-block" class="pull-right">
+                                    <h:commandLink class="btn btn-default">
+                                        Посилання
+                                        <f:ajax execute="@this" render="questionnaires"/>
+                                    </h:commandLink>
+                                    <h:commandLink class="btn btn-default btn-behav-danger"
+                                                   action="#{userQuestionnairesService.deleteQuestionnaire(it.index)}" >
+                                        Видалити
+                                        <f:ajax execute="@this" render="questionnaires"/>
+                                    </h:commandLink>
+                                </h:form>
                             </div>
-                        </div>
-                   </li>
+                        </li>
+                    </ui:repeat>
                 </ul>
             </h:panelGroup>
 

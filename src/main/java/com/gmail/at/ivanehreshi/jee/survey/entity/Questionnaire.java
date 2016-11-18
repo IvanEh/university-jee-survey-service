@@ -18,6 +18,9 @@ public class Questionnaire {
     @OneToMany(mappedBy = "questionnaire", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FilledQuestionnaire> filledQuestionnaires = new ArrayList<>();
 
+    @ManyToOne
+    private User author;
+
     public Questionnaire() {
     }
 
@@ -78,6 +81,14 @@ public class Questionnaire {
 
     public void setFilledQuestionnaires(List<FilledQuestionnaire> filledQuestionnaires) {
         this.filledQuestionnaires = filledQuestionnaires;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     @Override

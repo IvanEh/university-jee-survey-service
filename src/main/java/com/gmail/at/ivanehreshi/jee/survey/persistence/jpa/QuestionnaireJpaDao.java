@@ -1,5 +1,6 @@
 package com.gmail.at.ivanehreshi.jee.survey.persistence.jpa;
 
+import com.gmail.at.ivanehreshi.jee.survey.entity.FilledQuestionnaire;
 import com.gmail.at.ivanehreshi.jee.survey.entity.Question;
 import com.gmail.at.ivanehreshi.jee.survey.entity.Questionnaire;
 
@@ -23,5 +24,12 @@ public class QuestionnaireJpaDao extends JpaDao<Questionnaire, Long>{
         List<Question> questions = read(questionnaireId).getQuestions();
         questions.size();
         return questions;
+    }
+
+    public int countFilledQuestionnaires(Long questionnaireId) {
+        List<FilledQuestionnaire> filledQuestionnaires =
+                read(questionnaireId).getFilledQuestionnaires();
+
+        return filledQuestionnaires.size();
     }
 }
