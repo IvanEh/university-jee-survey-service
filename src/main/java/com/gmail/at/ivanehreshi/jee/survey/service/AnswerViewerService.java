@@ -40,7 +40,6 @@ public class AnswerViewerService {
 
     @PostConstruct
     public void init() {
-        System.out.println("Init");
         targetQuestionnaire = 1L;
         questionnaireCursor = 1;
 
@@ -73,12 +72,10 @@ public class AnswerViewerService {
             questionnaireCursor = filledQuestionnaires.size();
         }
 
-        System.out.println("Update");
         update();
     }
 
     public void next() {
-        System.out.println(getCurrentFilledQuestionnaire());
         questionnaireCursor++;
         if(questionnaireCursor > filledQuestionnaires.size()) {
             questionnaireCursor = 1;
