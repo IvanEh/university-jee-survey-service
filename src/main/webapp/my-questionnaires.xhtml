@@ -21,11 +21,14 @@
 
 </h:head>
 <h:body>
-    <ui:include src="components/navbar.xhtml"/>
+    <ui:include src="components/navbar.xhtml">
+        <ui:param name="link" value="q"/>
+    </ui:include>
 
     <div class="container-fluid">
 
         <ui:include src="components/sidebar.xhtml">
+            <ui:param name="link" value="q"/>
         </ui:include>
 
         <h:panelGroup styleClass="col-md-8 content"

@@ -5,8 +5,12 @@
 
     <div class="col-md-2">
         <ul class="nav nav-pills nav-stacked">
-            <li class="#{link eq '1' ? 'active' : ''}"><a href="">Home</a></li>
-            <li class="#{link eq '2' ? 'active' : ''}"><a href="">New Questionnaire</a></li>
+            <li class="#{link eq 'home' ? 'active' : ''}"><a href="home.xhtml">Головна</a></li>
+            <li class="#{link eq 'new' ? 'active' : ''}"><a href="new-questionnaire.xhtml">Створити Опитування</a></li>
+            <li class="#{link eq 'q' ? 'active' : ''}"><a href="my-questionnaires.xhtml">Мої Опитування</a></li>
+            <hr/>
+            <li class="#{link eq 'ans' ? 'active' : 'hidden'}"><a href="#">Перегляд опитування</a></li>
+            <li class="#{link eq 'logout' ? 'active' :''}"><a href="">Вийти</a></li>
         </ul>
     </div>
 
