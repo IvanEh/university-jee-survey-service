@@ -11,9 +11,4 @@ public class ChoiceQuestionAnswer extends Answer {
     public ChoiceQuestionAnswer(String answer, FilledQuestionnaire filledQuestionnaire, Question question) {
         super(answer, filledQuestionnaire, question);
     }
-
-    @Override
-    public Integer decodedAnswer() {
-        return null;
-    }
 }

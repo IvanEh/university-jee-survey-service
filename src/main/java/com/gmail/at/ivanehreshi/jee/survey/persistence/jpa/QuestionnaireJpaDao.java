@@ -4,12 +4,9 @@ import com.gmail.at.ivanehreshi.jee.survey.entity.Question;
 import com.gmail.at.ivanehreshi.jee.survey.entity.Questionnaire;
 
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import java.util.List;
 
 @Stateless
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class QuestionnaireJpaDao extends JpaDao<Questionnaire, Long>{
 
     public QuestionnaireJpaDao() {

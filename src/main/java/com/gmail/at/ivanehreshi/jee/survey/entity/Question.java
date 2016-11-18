@@ -66,6 +66,10 @@ public class Question {
         return answer;
     }
 
+    public String decodeAnswer(String answer) {
+        return null;
+    }
+
     @Override
     public String toString() {
         return "Question{" +

@@ -17,4 +17,9 @@ public class TextQuestion extends Question {
         answer.setQuestion(this);
         return answer;
     }
+
+    @Override
+    public String decodeAnswer(String answer) {
+        return answer;
+    }
 }

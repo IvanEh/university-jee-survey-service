@@ -27,11 +27,6 @@ public class Answer {
         this.filledQuestionnaire.getAnswers().add(this);
         this.question = question;
     }
-
-    public Object decodedAnswer() {
-        return answer;
-    }
-
     public String getAnswer() {
         return answer;
     }

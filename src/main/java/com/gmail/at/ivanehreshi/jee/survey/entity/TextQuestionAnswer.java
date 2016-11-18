@@ -11,9 +11,4 @@ public class TextQuestionAnswer extends Answer {
     public TextQuestionAnswer(String answer, FilledQuestionnaire filledQuestionnaire, Question question) {
         super(answer, filledQuestionnaire, question);
     }
-
-    @Override
-    public String decodedAnswer() {
-        return null;
-    }
 }

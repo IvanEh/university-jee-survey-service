@@ -1,6 +1,26 @@
 * {
     border-radius: 0 !important;
 }
+
+.spring-right-small {
+    margin-right: 3%;
+}
+
+.make-medium-size {
+    width: 20%;
+}
+
+.content-nav {
+    position: fixed;
+    font-size: 20pt;
+    margin-left: 0px;
+    top: 95%;
+}
+
+.padding-small {
+    padding: 5px 5px;
+}
+
 .content {
     border-left: solid 1px #eee;
 }
