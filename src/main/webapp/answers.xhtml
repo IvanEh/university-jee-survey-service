@@ -30,23 +30,32 @@
         </ui:include>
 
         <h:panelGroup styleClass="col-md-8 content"
-                      id="content"  >
+                      id="content">
             <div class="clearfix">
                 <h:form>
-                <h:commandLink class="btn btn-default spring-right-small pull-left" aria-label="Left Align"
-                               action="#{answerViewerService.changeOrder()}">
-                    <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span>
-                </h:commandLink>
-                </h:form>
+                    <h:commandLink class="btn btn-default spring-right-small pull-left" aria-label="Left Align"
+                                   action="#{answerViewerService.changeOrder()}">
+                        <f:ajax execute="@form" render="content"/>
+                        <c:choose>
+                            <c:when test="#{answerViewerService.isFromNewer()}">
+                                <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true" rendered="#{answerViewerService.isFromNewer()}"></span>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true" rendered="#{!answerViewerService.isFromNewer()}"></span>
+                            </c:otherwise>
+                        </c:choose>
 
-                <h:form class="make-medium-size pull-left">
-                    <div class="input-group">
-                        <h:inputText styleClass="form-control" placeholder="#" value="#{answerViewerService.questionnaireCursor}"/>
-                        <span class="input-group-addon spring-right-small">/ #{answerViewerService.filledQuestionnaires.size()}</span>
+                    </h:commandLink>
 
-                        <h:commandButton value="Перейти" styleClass="btn btn-default form-control" action="#{answerViewerService.update()}">
-                            <f:ajax execute="@form" render="content"/>
-                        </h:commandButton>
+                    <div class="make-medium-size pull-left">
+                        <div class="input-group">
+                            <h:inputText styleClass="form-control" placeholder="#" value="#{answerViewerService.questionnaireCursor}"/>
+                            <span class="input-group-addon spring-right-small">/ #{answerViewerService.filledQuestionnaires.size()}</span>
+
+                            <h:commandButton value="Перейти" styleClass="btn btn-default form-control" action="#{answerViewerService.update()}">
+                                <f:ajax execute="@form" render="content"/>
+                            </h:commandButton>
+                        </div>
                     </div>
                 </h:form>
             </div>

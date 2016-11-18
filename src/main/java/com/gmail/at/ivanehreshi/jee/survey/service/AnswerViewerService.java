@@ -7,6 +7,7 @@ import com.gmail.at.ivanehreshi.jee.survey.entity.Questionnaire;
 import com.gmail.at.ivanehreshi.jee.survey.persistence.jpa.FilledQuestionnaireDao;
 import com.gmail.at.ivanehreshi.jee.survey.persistence.jpa.QuestionJpaDao;
 import com.gmail.at.ivanehreshi.jee.survey.persistence.jpa.QuestionnaireJpaDao;
+import com.gmail.at.ivanehreshi.jee.survey.util.ReverseViewList;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -27,12 +28,10 @@ public class AnswerViewerService {
     @EJB
     private QuestionJpaDao questionJpaDao;
 
-    private boolean fromNewer = true;
-
     private Long targetQuestionnaire;
 
     private Questionnaire questionnaire;
-    private List<FilledQuestionnaire> filledQuestionnaires;
+    private ReverseViewList<FilledQuestionnaire> filledQuestionnaires;
     private List<Question> questions;
 
     private Integer questionnaireCursor;
@@ -47,19 +46,21 @@ public class AnswerViewerService {
     }
 
     public void update() {
-        long targetQuestionnaire;
-        targetQuestionnaire = this.targetQuestionnaire;
-
         questionnaire = questionnaireJpaDao.read(targetQuestionnaire);
         if(questionnaire == null) {
-            filledQuestionnaires = new ArrayList<>();
+            filledQuestionnaires = new ReverseViewList<>(new ArrayList<>());
             currentAnswers = new ArrayList<>();
         } else {
             questions = questionJpaDao.findQuestionsByQuestionnaireId(questionnaire.getId());
 
-            filledQuestionnaires = filledQuestionnaireDao.findFilledQuestionnaires(targetQuestionnaire);
-            currentAnswers = filledQuestionnaireDao.findAnswers(getCurrentFilledQuestionnaire().getId());
+            filledQuestionnaires = new ReverseViewList<>(filledQuestionnaireDao.findFilledQuestionnaires(targetQuestionnaire));
+            updateCurrentAnswers();
         }
+    }
+
+    public void updateCurrentAnswers() {
+        currentAnswers = filledQuestionnaireDao.findAnswers(getCurrentFilledQuestionnaire().getId());
+
     }
 
     public Answer getAnswer(int i) {
@@ -72,7 +73,7 @@ public class AnswerViewerService {
             questionnaireCursor = filledQuestionnaires.size();
         }
 
-        update();
+        updateCurrentAnswers();
     }
 
     public void next() {
@@ -80,7 +81,8 @@ public class AnswerViewerService {
         if(questionnaireCursor > filledQuestionnaires.size()) {
             questionnaireCursor = 1;
         }
-        update();
+
+        updateCurrentAnswers();
     }
 
     public String getStringAnswer(int i) {
@@ -90,7 +92,12 @@ public class AnswerViewerService {
     }
 
     public void changeOrder() {
-        fromNewer = !fromNewer;
+        filledQuestionnaires.reverse();
+        updateCurrentAnswers();
+    }
+
+    public boolean isFromNewer() {
+        return filledQuestionnaires.isReversed();
     }
 
     public List<Answer> getCurrentAnswers() {
@@ -114,7 +121,7 @@ public class AnswerViewerService {
     }
 
     public void setFilledQuestionnaires(List<FilledQuestionnaire> filledQuestionnaires) {
-        this.filledQuestionnaires = filledQuestionnaires;
+        this.filledQuestionnaires = new ReverseViewList<>(filledQuestionnaires);
     }
 
     public Questionnaire getQuestionnaire() {
