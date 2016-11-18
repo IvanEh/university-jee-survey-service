@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xsi:schemaLocation="http://xmlns.jcp.org/jsf/html http://xmlns.jcp.org/ns/jsf/html"
+>
+<h:head>
+    <title>Title</title>
+    <h:outputStylesheet library="bower_components" name="bootstrap/dist/css/bootstrap.css"/>
+    <h:outputStylesheet library="css" name="master.css"/>
+    <h:outputStylesheet library="css" name="home.css"/>
+    <h:outputScript library="js" name="master.js"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</h:head>
+
+<h:body>
+
+    <ui:include src="components/navbar.xhtml"/>
+
+    <div class="container-fluid">
+
+        <ui:include src="components/sidebar.xhtml">
+            <ui:param name="link" value="2" />
+        </ui:include>
+
+        <div class="col-md-8 content">
+            <h4>Система анкетнування</h4>
+
+            <p id="hint">
+                <span class="glyphicon glyphicon-arrow-left"></span> Виберіть дію у боковому меню
+            </p>
+        </div>
+
+    </div>
+
+
+    <h:outputScript library="bower_components" name="jquery/dist/jquery.js"/>
+
+</h:body>
+</html>
