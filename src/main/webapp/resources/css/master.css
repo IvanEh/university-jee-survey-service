@@ -10,6 +10,16 @@
     width: 20%;
 }
 
+a.underlined-link {
+    border-bottom: solid 2px #337ab7;
+}
+
+.btn-behav-danger:hover{
+    background: #db3535;
+    color: white;
+    font-weight: 600;
+}
+
 .content-nav {
     position: fixed;
     font-size: 20pt;
