@@ -1,0 +1,66 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+>
+    <!-- Template overview -->
+    <!--  args: questions -->
+    <!--  args: answers -->
+
+    <h:outputScript library="js" name="questionnaire.js"/>
+
+    <ui:repeat value="#{questions}" var="question" varStatus="status">
+        <c:set var="answer" value="#{answers[status.index]}"/>
+
+        <h:panelGroup layout="block" styleClass="question-container panel panel-default"
+                      rendered="${questionHelper.isTextQuestion(question)}">
+            <div class="panel-heading">
+                                <span class="badge question-num ">
+                                    <h:outputText value="${status.index + 1}"/>
+                                </span>
+                <h4>
+                    <h:outputText value="${question.title}"/>
+                </h4>
+            </div>
+
+            <div class="panel-body">
+                <div class="form-group">
+                    <h:inputText styleClass="form-control answer-text" value="${answer.answer}"/>
+                </div>
+            </div>
+        </h:panelGroup>
+
+
+        <h:panelGroup layout="block" styleClass="question-container panel panel-default"
+                      rendered="${questionHelper.isChoiceQuestion(question)}">
+            <c:set var="choiceQuestion" value="${questionHelper.toChoiceQuestion(question)}"/>
+            <h:inputText value="#{answer.answer}" p:id="choice-#{status.index}" style="display:none"/>
+
+            <div class="panel-heading">
+                            <span class="badge question-num ">
+                                <h:outputText value="${status.index + 1}"/>
+                            </span>
+                <h4>
+                    <h:outputText value="${choiceQuestion.title}"/>
+                </h4>
+            </div>
+
+            <div class="panel-body">
+                <ui:repeat value="${choiceQuestion.choices}" var="choice" varStatus="choiceStatus">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="opt"
+                                   onchange="inputChooseOneQuestion(${status.index}, #{choiceStatus.index})"/>
+                            <h:outputText value="${choice}" class="form-control"/>
+                        </label>
+                    </div>
+                </ui:repeat>
+            </div>
+
+        </h:panelGroup>
+
+    </ui:repeat>
+
+</ui:composition>
