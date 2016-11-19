@@ -86,7 +86,7 @@
                 <ui:repeat value="#{answerViewerService.questions}" var="question" varStatus="it">
                     <c:set var="answer" value="#{answerViewerService.getCurrentAnswers().get(it.index)}"/>
 
-                    <ui:decorate template="components/input-answer.xhtml">
+                    <ui:decorate template="components/output-answer.xhtml">
                         <ui:param name="question" value="#{question}"/>
                         <ui:param name="answer" value="#{answer}"/>
                     </ui:decorate>
