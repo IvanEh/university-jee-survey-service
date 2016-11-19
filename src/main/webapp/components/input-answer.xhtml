@@ -11,9 +11,6 @@
 
     <h:outputScript library="js" name="questionnaire.js"/>
 
-    <ui:repeat value="#{questions}" var="question" varStatus="status">
-        <c:set var="answer" value="#{answers[status.index]}"/>
-
         <h:panelGroup layout="block" styleClass="question-container panel panel-default"
                       rendered="${questionHelper.isTextQuestion(question)}">
             <div class="panel-heading">
@@ -60,7 +57,5 @@
             </div>
 
         </h:panelGroup>
-
-    </ui:repeat>
 
 </ui:composition>
