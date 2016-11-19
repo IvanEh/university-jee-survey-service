@@ -48,30 +48,33 @@
                 <h2>Питання</h2>
 
                 <h:panelGroup id="questions">
-                    <ui:decorate template="components/questions-create.xhtml">
-                        <ui:param name="questions" value="#{questionnaireCreatorService.questions}"/>
+                    <ui:repeat value="#{questionnaireCreatorService.questions}" var="question" varStatus="status">
+                        <ui:decorate template="components/input-question.xhtml">
+                            <ui:param name="question" value="#{question}"/>
+                            <ui:param name="index" value="#{status.index}"/>
 
-                        <ui:define name="button-delete">
-                            <h:commandButton styleClass="btn" value="Видалити" action="#{questionnaireCreatorService.removeQuestion(question)}">
-                                <f:ajax render="@form" execute="@form"/>
-                            </h:commandButton>
-                        </ui:define>
+                            <ui:define name="button-delete">
+                                <h:commandButton styleClass="btn" value="Видалити" action="#{questionnaireCreatorService.removeQuestion(question)}">
+                                    <f:ajax render="@form" execute="@form"/>
+                                </h:commandButton>
+                            </ui:define>
 
-                        <ui:define name="button-add-choice">
-                            <h:commandButton styleClass="btn" value="+" action="#{questionnaireCreatorService.addChoice(choiceQuestion)}">
-                                <f:ajax render="@form" execute="@form"/>
-                            </h:commandButton>
-                        </ui:define>
-                    </ui:decorate>
+                            <ui:define name="button-add-choice">
+                                <h:commandButton styleClass="btn" value="+" action="#{questionnaireCreatorService.addChoice(choiceQuestion)}">
+                                    <f:ajax render="@form" execute="@form"/>
+                                </h:commandButton>
+                            </ui:define>
+                        </ui:decorate>
+                    </ui:repeat>
                 </h:panelGroup>
 
 
                 <div class="btn-container">
-                    <h:commandLink styleClass="btn" value="+Текст" action="${questionnaireCreatorService.addTextQuestion()}">
+                    <h:commandLink styleClass="btn" value="+Текст" action="#{questionnaireCreatorService.addTextQuestion()}">
                         <f:ajax render="questions" execute="@form"/>
                     </h:commandLink>
 
-                    <h:commandLink styleClass="btn" value="+Вибір" action="${questionnaireCreatorService.addChoiceQuestion()}">
+                    <h:commandLink styleClass="btn" value="+Вибір" action="#{questionnaireCreatorService.addChoiceQuestion()}">
                         <f:ajax render="questions" execute="@form"/>
                     </h:commandLink>
                 </div>
