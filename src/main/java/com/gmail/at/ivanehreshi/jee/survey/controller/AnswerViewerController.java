@@ -9,7 +9,6 @@ import com.gmail.at.ivanehreshi.jee.survey.persistence.jpa.QuestionJpaDao;
 import com.gmail.at.ivanehreshi.jee.survey.persistence.jpa.QuestionnaireJpaDao;
 import com.gmail.at.ivanehreshi.jee.survey.util.ReverseViewList;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -34,16 +33,8 @@ public class AnswerViewerController {
     private ReverseViewList<FilledQuestionnaire> filledQuestionnaires;
     private List<Question> questions;
 
-    private Integer questionnaireCursor;
+    private Integer questionnaireCursor = 1;
     private List<Answer> currentAnswers;
-
-    @PostConstruct
-    public void init() {
-        targetQuestionnaire = 2L;
-        questionnaireCursor = 1;
-
-        update();
-    }
 
     public void update() {
         questionnaire = questionnaireJpaDao.read(targetQuestionnaire);
@@ -171,6 +162,5 @@ public class AnswerViewerController {
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
-
 
 }

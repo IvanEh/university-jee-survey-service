@@ -21,6 +21,10 @@
     <h:outputScript library="js" name="questionnaire.js"/>
 
 </h:head>
+<f:metadata>
+    <f:viewParam name="q" value="#{answerViewerController.targetQuestionnaire}"/>
+    <f:viewAction action="#{answerViewerController.update()}"/>
+</f:metadata>
 <h:body>
     <ui:include src="components/navbar.xhtml">
     </ui:include>
