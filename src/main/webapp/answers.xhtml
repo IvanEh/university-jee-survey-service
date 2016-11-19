@@ -86,58 +86,10 @@
                 <ui:repeat value="#{answerViewerService.questions}" var="question" varStatus="it">
                     <c:set var="answer" value="#{answerViewerService.getCurrentAnswers().get(it.index)}"/>
 
-                    <h:panelGroup layout="block" styleClass="question-container"
-                                  rendered="${questionHelper.isTextQuestion(question)}">
-
-                        <div class="col-md-6 padding-small">
-                            <div class="form-inline t-full-width">
-                                <div class="num-item t-cell">
-                                    <h:outputText value="${it.index + 1}"/>
-                                </div>
-
-                                <div class="form-control t-cell-span-remaining">
-                                    #{question.title}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 padding-small">
-                            <div class="form-group">
-                                <div class="form-control answer-text">
-                                    #{answer.answer}
-                                </div>
-                            </div>
-                        </div>
-
-                    </h:panelGroup>
-
-                    <h:panelGroup layout="block" styleClass="question-container"
-                                  rendered="${questionHelper.isChoiceQuestion(question)}">
-
-                        <div class="col-md-6 padding-small">
-                            <div class="form-inline t-full-width">
-                                <div class="num-item t-cell">
-                                    <h:outputText value="${it.index + 1}"/>
-                                </div>
-
-                                <div class="form-control t-cell-span-remaining">
-                                    #{question.title}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 padding-small">
-                            <div class="form-group t-full-width">
-                                <div class="t-cell num-item">
-                                   <input type="radio" checked="checked" class="t-center" style="margin: 0px"/>
-                                </div>
-                                <div class="form-control answer-text t-cell-span-remaining">
-                                    <h:outputText value="#{answerViewerService.getStringAnswer(it.index)}"/>
-                                </div>
-                            </div>
-                        </div>
-
-                    </h:panelGroup>
+                    <ui:decorate template="components/input-answer.xhtml">
+                        <ui:param name="question" value="#{question}"/>
+                        <ui:param name="answer" value="#{answer}"/>
+                    </ui:decorate>
                 </ui:repeat>
 
             </h:panelGroup>
