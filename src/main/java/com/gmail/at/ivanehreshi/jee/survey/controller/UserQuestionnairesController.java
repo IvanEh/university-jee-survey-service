@@ -1,4 +1,4 @@
-package com.gmail.at.ivanehreshi.jee.survey.service;
+package com.gmail.at.ivanehreshi.jee.survey.controller;
 
 import com.gmail.at.ivanehreshi.jee.survey.entity.Questionnaire;
 import com.gmail.at.ivanehreshi.jee.survey.entity.User;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @ManagedBean
 @ViewScoped
-public class UserQuestionnairesService {
+public class UserQuestionnairesController {
     @EJB
     private UserJpaDao userJpaDao;
 

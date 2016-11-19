@@ -1,4 +1,4 @@
-package com.gmail.at.ivanehreshi.jee.survey.service;
+package com.gmail.at.ivanehreshi.jee.survey.controller;
 
 import com.gmail.at.ivanehreshi.jee.survey.entity.Answer;
 import com.gmail.at.ivanehreshi.jee.survey.entity.FilledQuestionnaire;
@@ -18,7 +18,7 @@ import java.util.List;
 
 @ManagedBean
 @ViewScoped
-public class AnswerViewerService {
+public class AnswerViewerController {
     @EJB
     private FilledQuestionnaireDao filledQuestionnaireDao;
 
@@ -39,7 +39,7 @@ public class AnswerViewerService {
 
     @PostConstruct
     public void init() {
-        targetQuestionnaire = 1L;
+        targetQuestionnaire = 2L;
         questionnaireCursor = 1;
 
         update();

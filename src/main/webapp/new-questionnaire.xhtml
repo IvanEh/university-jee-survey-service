@@ -33,14 +33,14 @@
 
                 <div class="input-group">
                     <span class="input-group-addon long-addon">Назва опитування</span>
-                    <h:inputText styleClass="form-control" value="${questionnaireCreatorService.questionnaire.name}"></h:inputText>
+                    <h:inputText styleClass="form-control" value="${questionnaireCreatorController.questionnaire.name}"></h:inputText>
                 </div>
 
                 <br/>
 
                 <div class="input-group">
                     <span class="input-group-addon long-addon">Опис опитування</span>
-                    <h:inputTextarea class="form-control" rows="2" value="${questionnaireCreatorService.questionnaire.description}"></h:inputTextarea>
+                    <h:inputTextarea class="form-control" rows="2" value="${questionnaireCreatorController.questionnaire.description}"></h:inputTextarea>
                 </div>
 
                 <hr/>
@@ -48,19 +48,19 @@
                 <h2>Питання</h2>
 
                 <h:panelGroup id="questions">
-                    <ui:repeat value="#{questionnaireCreatorService.questions}" var="question" varStatus="status">
+                    <ui:repeat value="#{questionnaireCreatorController.questions}" var="question" varStatus="status">
                         <ui:decorate template="components/input-question.xhtml">
                             <ui:param name="question" value="#{question}"/>
                             <ui:param name="index" value="#{status.index}"/>
 
                             <ui:define name="button-delete">
-                                <h:commandButton styleClass="btn" value="Видалити" action="#{questionnaireCreatorService.removeQuestion(question)}">
+                                <h:commandButton styleClass="btn" value="Видалити" action="#{questionnaireCreatorController.removeQuestion(question)}">
                                     <f:ajax render="@form" execute="@form"/>
                                 </h:commandButton>
                             </ui:define>
 
                             <ui:define name="button-add-choice">
-                                <h:commandButton styleClass="btn" value="+" action="#{questionnaireCreatorService.addChoice(choiceQuestion)}">
+                                <h:commandButton styleClass="btn" value="+" action="#{questionnaireCreatorController.addChoice(choiceQuestion)}">
                                     <f:ajax render="@form" execute="@form"/>
                                 </h:commandButton>
                             </ui:define>
@@ -70,18 +70,18 @@
 
 
                 <div class="btn-container">
-                    <h:commandLink styleClass="btn" value="+Текст" action="#{questionnaireCreatorService.addTextQuestion()}">
+                    <h:commandLink styleClass="btn" value="+Текст" action="#{questionnaireCreatorController.addTextQuestion()}">
                         <f:ajax render="questions" execute="@form"/>
                     </h:commandLink>
 
-                    <h:commandLink styleClass="btn" value="+Вибір" action="#{questionnaireCreatorService.addChoiceQuestion()}">
+                    <h:commandLink styleClass="btn" value="+Вибір" action="#{questionnaireCreatorController.addChoiceQuestion()}">
                         <f:ajax render="questions" execute="@form"/>
                     </h:commandLink>
                 </div>
 
         </div>
 
-            <h:commandLink styleClass="save" action="#{questionnaireCreatorService.save()}" value="Зберегти"/>
+            <h:commandLink styleClass="save" action="#{questionnaireCreatorController.save()}" value="Зберегти"/>
         </h:form>
     </div>
 

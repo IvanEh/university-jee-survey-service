@@ -35,28 +35,28 @@
                       id="content">
             <h1>Персональна сторінка</h1>
             <p>
-                <strong>username: </strong> #{userQuestionnairesService.user.username}
+                <strong>username: </strong> #{userQuestionnairesController.user.username}
             </p>
             <p>
-                #{userQuestionnairesService.user.firstName} #{userQuestionnairesService.user.lastName}
+                #{userQuestionnairesController.user.firstName} #{userQuestionnairesController.user.lastName}
             </p>
 
             <hr/>
 
             <h:panelGroup id="questionnaires" styleClass="col-md-9">
                 <ul>
-                    <ui:repeat value="#{userQuestionnairesService.questionnaires}" var="questionnaire" varStatus="it">
+                    <ui:repeat value="#{userQuestionnairesController.questionnaires}" var="questionnaire" varStatus="it">
                         <li>
                             <div>
                                 <a href="#" class="underlined-link">#{questionnaire.name}</a>
-                                <span class="badge">#{userQuestionnairesService.countFilledQuestionnaires(questionnaire)}</span>
+                                <span class="badge">#{userQuestionnairesController.countFilledQuestionnaires(questionnaire)}</span>
                                 <h:form style="display: inline-block" class="pull-right">
                                     <h:commandLink class="btn btn-default">
                                         Посилання
                                         <f:ajax execute="@this" render="questionnaires"/>
                                     </h:commandLink>
                                     <h:commandLink class="btn btn-default btn-behav-danger"
-                                                   action="#{userQuestionnairesService.deleteQuestionnaire(it.index)}" >
+                                                   action="#{userQuestionnairesController.deleteQuestionnaire(it.index)}" >
                                         Видалити
                                         <f:ajax execute="@this" render="questionnaires"/>
                                     </h:commandLink>

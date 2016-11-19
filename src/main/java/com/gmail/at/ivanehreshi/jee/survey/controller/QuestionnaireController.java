@@ -1,4 +1,4 @@
-package com.gmail.at.ivanehreshi.jee.survey.service;
+package com.gmail.at.ivanehreshi.jee.survey.controller;
 
 import com.gmail.at.ivanehreshi.jee.survey.entity.Answer;
 import com.gmail.at.ivanehreshi.jee.survey.entity.FilledQuestionnaire;
@@ -18,7 +18,7 @@ import java.util.Map;
 
 @ViewScoped
 @ManagedBean
-public class QuestionnaireFillerService {
+public class QuestionnaireController {
     @EJB
     private QuestionnaireJpaDao questionnaireDao;
 
@@ -36,7 +36,7 @@ public class QuestionnaireFillerService {
 
     private FilledQuestionnaire filledQuestionnaire;
 
-    public QuestionnaireFillerService() {
+    public QuestionnaireController() {
     }
 
     @PostConstruct

@@ -35,14 +35,14 @@
             <div class="clearfix">
                 <h:form>
                     <h:commandLink class="btn btn-default spring-right-small pull-left" aria-label="Left Align"
-                                   action="#{answerViewerService.changeOrder()}">
+                                   action="#{answerViewerController.changeOrder()}">
                         <f:ajax execute="@form" render="content"/>
                         <c:choose>
-                            <c:when test="#{answerViewerService.isFromNewer()}">
-                                <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true" rendered="#{answerViewerService.isFromNewer()}"></span>
+                            <c:when test="#{answerViewerController.isFromNewer()}">
+                                <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true" rendered="#{answerViewerController.isFromNewer()}"></span>
                             </c:when>
                             <c:otherwise>
-                                <span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true" rendered="#{!answerViewerService.isFromNewer()}"></span>
+                                <span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true" rendered="#{!answerViewerController.isFromNewer()}"></span>
                             </c:otherwise>
                         </c:choose>
 
@@ -50,10 +50,10 @@
 
                     <div class="make-medium-size pull-left">
                         <div class="input-group">
-                            <h:inputText styleClass="form-control" placeholder="#" value="#{answerViewerService.questionnaireCursor}"/>
-                            <span class="input-group-addon spring-right-small">/ #{answerViewerService.filledQuestionnaires.size()}</span>
+                            <h:inputText styleClass="form-control" placeholder="#" value="#{answerViewerController.questionnaireCursor}"/>
+                            <span class="input-group-addon spring-right-small">/ #{answerViewerController.filledQuestionnaires.size()}</span>
 
-                            <h:commandButton value="Перейти" styleClass="btn btn-default form-control" action="#{answerViewerService.update()}">
+                            <h:commandButton value="Перейти" styleClass="btn btn-default form-control" action="#{answerViewerController.update()}">
                                 <f:ajax execute="@form" render="content"/>
                             </h:commandButton>
                         </div>
@@ -64,14 +64,14 @@
             <div>
                 <h:form>
                 <div class="pull-left">
-                    <h:commandLink action="#{answerViewerService.prev()}">
+                    <h:commandLink action="#{answerViewerController.prev()}">
                         <span class="glyphicon glyphicon-chevron-left content-nav" aria-hidden="true"></span>
                         <f:ajax execute="@form" render="content"/>
                     </h:commandLink>
                 </div>
 
                 <div class="pull-right">
-                    <h:commandLink action="#{answerViewerService.next()}">
+                    <h:commandLink action="#{answerViewerController.next()}">
                         <span class="glyphicon glyphicon-chevron-right content-nav" aria-hidden="true"></span>
                         <f:ajax execute="@form" render="content"/>
                     </h:commandLink>
@@ -83,8 +83,8 @@
             <hr/>
 
             <h:panelGroup id="answers">
-                <ui:repeat value="#{answerViewerService.questions}" var="question" varStatus="it">
-                    <c:set var="answer" value="#{answerViewerService.getCurrentAnswers().get(it.index)}"/>
+                <ui:repeat value="#{answerViewerController.questions}" var="question" varStatus="it">
+                    <c:set var="answer" value="#{answerViewerController.getCurrentAnswers().get(it.index)}"/>
 
                     <ui:decorate template="components/output-answer.xhtml">
                         <ui:param name="question" value="#{question}"/>

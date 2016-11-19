@@ -27,19 +27,19 @@
             <ui:param name="link" value="ans"/>
         </ui:include>
 
-        <h:form id="form" rendered="#{questionnaireFillerService.isValidTest()}">
+        <h:form id="form" rendered="#{questionnaireController.isValidTest()}">
             <div class="col-md-8 content">
-                <h1><h:outputText value="${questionnaireFillerService.questionnaire.name}"/></h1>
+                <h1><h:outputText value="${questionnaireController.questionnaire.name}"/></h1>
 
                 <h5>
-                    <h:outputText value="${questionnaireFillerService.questionnaire.description}"/>
+                    <h:outputText value="${questionnaireController.questionnaire.description}"/>
                 </h5>
 
                 <hr/>
 
                 <h:panelGroup id="questions">
-                    <ui:repeat value="#{questionnaireFillerService.questions}" var="question" varStatus="status">
-                        <c:set var="answer" value="#{answers[status.index]}"/>
+                    <ui:repeat value="#{questionnaireController.questions}" var="question" varStatus="status">
+                        <c:set var="answer" value="#{questionnaireController.answers[status.index]}"/>
 
                         <ui:decorate template="components/input-answer.xhtml">
                             <ui:param name="question" value="#{question}"/>
@@ -50,7 +50,7 @@
 
             </div>
 
-            <h:commandLink styleClass="save" outcome="" action="#{questionnaireFillerService.save()}" value="Зберегти">
+            <h:commandLink styleClass="save" outcome="" action="#{questionnaireController.save()}" value="Зберегти">
             </h:commandLink>
         </h:form>
     </div>
