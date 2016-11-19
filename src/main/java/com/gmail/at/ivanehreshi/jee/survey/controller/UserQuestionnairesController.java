@@ -49,9 +49,14 @@ public class UserQuestionnairesController {
         return questionnaireJpaDao.countFilledQuestionnaires(q.getId());
     }
 
+    public String showLink(Questionnaire q) {
+        return "questionnaire-created?faces-redirect=true&id=" + q.getId();
+    }
+
     public String viewAnswers(Long questionnaireId) {
         return "answers?faces-redirect=true&q=" + questionnaireId;
     }
+
     public void setQuestionnaires(List<Questionnaire> questionnaires) {
         this.questionnaires = questionnaires;
     }

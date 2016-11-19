@@ -50,9 +50,9 @@
                                 <strong>#{questionnaire.author.username}</strong>
 
                                 <div style="display: inline-block" class="pull-right">
-                                    <h:commandLink class="btn btn-default">
+                                    <h:commandLink class="btn btn-default"
+                                                   action="#{adminQuestionnairesController.showLink(questionnaire)}">
                                         Посилання
-                                        <f:ajax execute="@this" render="questionnaires"/>
                                     </h:commandLink>
                                     <h:commandLink class="btn btn-default btn-behav-danger"
                                                    action="#{adminQuestionnairesController.deleteQuestionnaire(it.index)}" >

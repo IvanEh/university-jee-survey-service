@@ -57,10 +57,10 @@
                                 <span class="badge">#{userQuestionnairesController.countFilledQuestionnaires(questionnaire)}</span>
 
                                 <div style="display: inline-block" class="pull-right">
-                                    <h:commandLink class="btn btn-default">
-                                        Посилання
-                                        <f:ajax execute="@this" render="questionnaires"/>
-                                    </h:commandLink>
+                                    <h:commandLink class="btn btn-default"
+                                                   action="#{userQuestionnairesController.showLink(questionnaire)}"
+                                                   value="Посилання"/>
+
                                     <h:commandLink class="btn btn-default btn-behav-danger"
                                                    action="#{userQuestionnairesController.deleteQuestionnaire(it.index)}" >
                                         Видалити
