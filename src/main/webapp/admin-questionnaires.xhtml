@@ -1,0 +1,77 @@
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xsi:schemaLocation="http://xmlns.jcp.org/jsf/html http://xmlns.jcp.org/ns/jsf/html"
+>
+<h:head>
+    <title>Title</title>
+    <h:outputStylesheet library="bower_components" name="bootstrap/dist/css/bootstrap.css"/>
+    <h:outputStylesheet library="css" name="master.css"/>
+    <h:outputStylesheet library="css" name="user.css"/>
+    <h:outputScript library="bower_components" name="jquery/dist/jquery.js"/>
+    <h:outputScript library="js" name="master.js"/>
+    <h:outputScript library="js" name="questionnaire.js"/>
+
+</h:head>
+<h:body>
+    <ui:include src="components/navbar.xhtml">
+        <ui:param name="link" value="q"/>
+    </ui:include>
+
+    <div class="container-fluid">
+
+        <ui:include src="components/sidebar.xhtml">
+            <ui:param name="link" value="all-q"/>
+            <ui:param name="admin" value="true"/>
+        </ui:include>
+
+        <h:panelGroup styleClass="col-md-8 content"
+                      id="content">
+            <h1>Список всіх анкет: </h1>
+
+            <hr/>
+
+            <h:panelGroup id="questionnaires" styleClass="col-md-9">
+                <ul>
+                    <ui:repeat value="#{adminQuestionnairesController.questionnaires}" var="questionnaire" varStatus="it">
+                        <li>
+                            <h:form>
+
+                                <h:commandLink class="underlined-link"
+                                               action="#{adminQuestionnairesController.viewAnswers(questionnaire.id)}"
+                                               value="#{questionnaire.name}" >
+                                </h:commandLink>
+
+                                <span class="badge">#{userQuestionnairesController.countFilledQuestionnaires(questionnaire)}</span>
+
+                                <strong>#{questionnaire.author.username}</strong>
+
+                                <div style="display: inline-block" class="pull-right">
+                                    <h:commandLink class="btn btn-default">
+                                        Посилання
+                                        <f:ajax execute="@this" render="questionnaires"/>
+                                    </h:commandLink>
+                                    <h:commandLink class="btn btn-default btn-behav-danger"
+                                                   action="#{adminQuestionnairesController.deleteQuestionnaire(it.index)}" >
+                                        Видалити
+                                        <f:ajax execute="@this" render="questionnaires"/>
+                                    </h:commandLink>
+                                </div>
+                            </h:form>
+                        </li>
+                    </ui:repeat>
+                </ul>
+            </h:panelGroup>
+
+        </h:panelGroup>
+
+    </div>
+
+
+
+
+</h:body>
+</html>
