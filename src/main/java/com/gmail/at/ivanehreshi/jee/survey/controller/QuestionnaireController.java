@@ -13,6 +13,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -45,10 +46,19 @@ public class QuestionnaireController {
     }
 
     private void init() {
+        if(targetQuestionnaire == null)
+            return;
+
         questionnaire = questionnaireDao.read(targetQuestionnaire);
-        questions = questionnaireDao.getQuestions(targetQuestionnaire);
-        filledQuestionnaire = new FilledQuestionnaire();
-        initFilledQuestionnaire();
+
+        if(!isValidTest()) {
+            questions = Collections.EMPTY_LIST;
+        } else {
+            questions = questionnaireDao.getQuestions(targetQuestionnaire);
+            filledQuestionnaire = new FilledQuestionnaire();
+            initFilledQuestionnaire();
+        }
+
     }
 
     public void updateTarget(Long id) {
@@ -61,7 +71,7 @@ public class QuestionnaireController {
     }
 
     public boolean isValidTest() {
-        return targetQuestionnaire != null;
+        return targetQuestionnaire != null && questionnaire != null;
     }
 
     private void initFilledQuestionnaire() {
@@ -84,6 +94,10 @@ public class QuestionnaireController {
     }
 
     public List<Answer> getAnswers() {
+        if(!isValidTest()) {
+            return Collections.EMPTY_LIST;
+        }
+
         return getFilledQuestionnaire().getAnswers();
     }
 
