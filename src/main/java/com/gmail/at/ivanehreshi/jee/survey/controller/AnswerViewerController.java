@@ -12,8 +12,10 @@ import com.gmail.at.ivanehreshi.jee.survey.util.ReverseViewList;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @ManagedBean
 @ViewScoped
@@ -36,7 +38,9 @@ public class AnswerViewerController {
     private Integer questionnaireCursor = 1;
     private List<Answer> currentAnswers;
 
-    public void update() {
+    public void init() {
+        targetQuestionnaire = getTargetQuestionnaireParam();
+
         questionnaire = questionnaireJpaDao.read(targetQuestionnaire);
         if(questionnaire == null) {
             filledQuestionnaires = new ReverseViewList<>(new ArrayList<>());
@@ -89,6 +93,12 @@ public class AnswerViewerController {
 
     public boolean isFromNewer() {
         return filledQuestionnaires.isReversed();
+    }
+
+    private Long getTargetQuestionnaireParam() {
+        Map<String, String> requestParameterMap = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String s = requestParameterMap.get("q") ;
+        return s == null ? null : Long.valueOf(s);
     }
 
     public List<Answer> getCurrentAnswers() {

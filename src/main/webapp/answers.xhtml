@@ -23,7 +23,7 @@
 </h:head>
 <f:metadata>
     <f:viewParam name="q" value="#{answerViewerController.targetQuestionnaire}"/>
-    <f:viewAction action="#{answerViewerController.update()}"/>
+    <f:viewAction action="#{answerViewerController.init()}"/>
 </f:metadata>
 <h:body>
     <ui:include src="components/navbar.xhtml">
@@ -35,54 +35,56 @@
             <ui:param name="link" value="answers"/>
         </ui:include>
 
-        <h:panelGroup styleClass="col-md-8 content"
-                      id="content">
+        <h:panelGroup styleClass="col-md-8 content">
+        <h:form id="content">
+
             <div class="clearfix">
-                <h:form>
-                    <h:commandLink class="btn btn-default spring-right-small pull-left" aria-label="Left Align"
-                                   action="#{answerViewerController.changeOrder()}">
-                        <f:ajax execute="@form" render="content"/>
-                        <c:choose>
-                            <c:when test="#{answerViewerController.isFromNewer()}">
-                                <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true" rendered="#{answerViewerController.isFromNewer()}"></span>
-                            </c:when>
-                            <c:otherwise>
-                                <span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true" rendered="#{!answerViewerController.isFromNewer()}"></span>
-                            </c:otherwise>
-                        </c:choose>
+                <h:commandLink class="btn btn-default spring-right-small pull-left" aria-label="Left Align"
+                               action="#{answerViewerController.changeOrder()}">
+                    <c:choose>
+                        <c:when test="#{answerViewerController.isFromNewer()}">
+                            <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"
+                                  rendered="#{answerViewerController.isFromNewer()}"></span>
+                        </c:when>
+                        <c:otherwise>
+                            <span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"
+                                  rendered="#{!answerViewerController.isFromNewer()}"></span>
+                        </c:otherwise>
+                    </c:choose>
 
-                    </h:commandLink>
+                    <f:ajax execute="@form" render="content"/>
 
-                    <div class="make-medium-size pull-left">
-                        <div class="input-group">
-                            <h:inputText styleClass="form-control" placeholder="#" value="#{answerViewerController.questionnaireCursor}"/>
-                            <span class="input-group-addon spring-right-small">/ #{answerViewerController.filledQuestionnaires.size()}</span>
+                </h:commandLink>
 
-                            <h:commandButton value="Перейти" styleClass="btn btn-default form-control" action="#{answerViewerController.update()}">
-                                <f:ajax execute="@form" render="content"/>
-                            </h:commandButton>
-                        </div>
+                <div class="make-medium-size pull-left">
+                    <div class="input-group">
+                        <h:inputText styleClass="form-control" placeholder="#"
+                                     value="#{answerViewerController.questionnaireCursor}"/>
+                        <span class="input-group-addon spring-right-small">/ #{answerViewerController.filledQuestionnaires.size()}</span>
+
+                        <h:commandButton value="Перейти" styleClass="btn btn-default form-control"
+                                         action="#{answerViewerController.updateCurrentAnswers()}">
+                            <f:ajax execute="@form" render="content"/>
+                        </h:commandButton>
                     </div>
-                </h:form>
+                </div>
             </div>
 
             <div>
-                <h:form>
-                <div class="pull-left">
-                    <h:commandLink action="#{answerViewerController.prev()}">
-                        <span class="glyphicon glyphicon-chevron-left content-nav" aria-hidden="true"></span>
-                        <f:ajax execute="@form" render="content"/>
-                    </h:commandLink>
-                </div>
+                    <div class="pull-left">
+                        <h:commandLink action="#{answerViewerController.prev()}">
+                            <span class="glyphicon glyphicon-chevron-left content-nav" aria-hidden="true"></span>
+                            <f:ajax execute="@this" render="content"/>
+                        </h:commandLink>
+                    </div>
 
-                <div class="pull-right">
-                    <h:commandLink action="#{answerViewerController.next()}">
-                        <span class="glyphicon glyphicon-chevron-right content-nav" aria-hidden="true"></span>
-                        <f:ajax execute="@form" render="content"/>
-                    </h:commandLink>
-                </div>
+                    <div class="pull-right">
+                        <h:commandLink action="#{answerViewerController.next()}">
+                            <span class="glyphicon glyphicon-chevron-right content-nav" aria-hidden="true"></span>
+                            <f:ajax execute="@this" render="content"/>
+                        </h:commandLink>
+                    </div>
 
-                </h:form>
             </div>
 
             <hr/>
@@ -99,11 +101,10 @@
 
             </h:panelGroup>
 
+        </h:form>
         </h:panelGroup>
 
     </div>
-
-
 
 
 </h:body>
