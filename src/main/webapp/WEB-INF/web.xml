@@ -31,6 +31,33 @@
         <session-timeout>45</session-timeout>
     </session-config>
 
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>VacancySecurity</realm-name>
+        <form-login-config>
+            <form-login-page>/login.xhtml</form-login-page>
+            <form-error-page>/error/login-error.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Protected Area</web-resource-name>
+            <url-pattern>resources/*</url-pattern>
+        </web-resource-collection>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Protected Area</web-resource-name>
+            <url-pattern>*.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>USER</role-name>
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+
     <!-- Display verbatim error messages -->
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>

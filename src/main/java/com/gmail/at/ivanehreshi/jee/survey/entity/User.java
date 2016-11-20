@@ -21,6 +21,11 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @ElementCollection
+    @JoinTable(joinColumns = @JoinColumn(referencedColumnName = "username", name = "username"),
+               name = "Role")
+    private List<String> roles;
+
     @OneToMany(mappedBy = "author")
     private List<Questionnaire> questionnaires;
 
