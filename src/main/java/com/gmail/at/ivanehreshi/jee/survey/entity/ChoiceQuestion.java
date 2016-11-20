@@ -1,12 +1,13 @@
 package com.gmail.at.ivanehreshi.jee.survey.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class ChoiceQuestion extends Question {
+public class ChoiceQuestion extends Question implements Serializable {
     @ElementCollection(fetch = FetchType.EAGER)
     @OrderColumn(name = "order_column")
     public List<String> choices = new ArrayList<>();

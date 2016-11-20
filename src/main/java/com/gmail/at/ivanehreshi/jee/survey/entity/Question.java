@@ -1,10 +1,11 @@
 package com.gmail.at.ivanehreshi.jee.survey.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Question {
+public class Question implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;

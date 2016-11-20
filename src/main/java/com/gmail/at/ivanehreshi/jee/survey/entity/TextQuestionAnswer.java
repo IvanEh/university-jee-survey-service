@@ -1,9 +1,10 @@
 package com.gmail.at.ivanehreshi.jee.survey.entity;
 
 import javax.persistence.Entity;
+import java.io.Serializable;
 
 @Entity
-public class TextQuestionAnswer extends Answer {
+public class TextQuestionAnswer extends Answer implements Serializable{
 
     public TextQuestionAnswer() {
     }

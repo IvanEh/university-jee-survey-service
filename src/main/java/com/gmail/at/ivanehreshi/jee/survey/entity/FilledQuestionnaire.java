@@ -1,6 +1,7 @@
 package com.gmail.at.ivanehreshi.jee.survey.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class FilledQuestionnaire {
+public class FilledQuestionnaire implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
