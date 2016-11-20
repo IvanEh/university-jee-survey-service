@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -83,6 +84,7 @@ public class QuestionnaireController {
     }
 
     public String save() {
+        filledQuestionnaire.setDate(new Date());
         filledQuestionnaireDao.create(filledQuestionnaire);
         return "questionnaire-success?faces-redirect=true";
     }

@@ -2,6 +2,7 @@ package com.gmail.at.ivanehreshi.jee.survey.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,6 +12,10 @@ public class FilledQuestionnaire {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
 
     @ManyToOne
     private Questionnaire questionnaire;
@@ -61,10 +66,19 @@ public class FilledQuestionnaire {
         }
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "FilledQuestionnaire{" +
                 "id=" + id +
+                ", date=" + date +
                 ", questionnaire=" + questionnaire.getId() +
                 '}';
     }

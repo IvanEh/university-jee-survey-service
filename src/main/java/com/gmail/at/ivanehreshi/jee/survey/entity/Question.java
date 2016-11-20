@@ -11,8 +11,6 @@ public class Question {
 
     private String title;
 
-    private boolean required;
-
     @ManyToOne(optional = false)
     private Questionnaire questionnaire;
 
@@ -21,7 +19,6 @@ public class Question {
 
     public Question(String title, Questionnaire questionnaire, boolean required) {
         this.questionnaire = questionnaire;
-        this.required = required;
         this.title = title;
     }
 
@@ -43,15 +40,6 @@ public class Question {
             this.questionnaire.getQuestions().add(this);
         }
     }
-
-    public boolean isRequired() {
-        return required;
-    }
-
-    public void setRequired(boolean required) {
-        this.required = required;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -75,7 +63,6 @@ public class Question {
         return "Question{" +
                 "questionnaire=" + questionnaire.getId() +
                 ", id=" + id +
-                ", required=" + required +
                 ", title='" + title + '\'' +
                 '}';
     }
