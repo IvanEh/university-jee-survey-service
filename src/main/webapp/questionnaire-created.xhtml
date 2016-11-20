@@ -31,7 +31,7 @@
                 <h3>Опитування успішно створено</h3>
                 <p>
                     <c:set var="domain" value="#{request.requestURL.toString().substring(0, request.requestURL.toString().indexOf(request.contextPath))}"/>
-                    <c:set var="link" value="#{domain}/#{request.contextPath}/questionnaire.xhtml?q=#{param.id}"/>
+                    <c:set var="link" value="#{domain}#{request.contextPath}/questionnaire.xhtml?q=#{param.id}"/>
                     Опитування доступне за <a href="#{link}">посиланням</a>
                     <h:inputText styleClass="form-control" value="#{link}"/>
                 </p>
