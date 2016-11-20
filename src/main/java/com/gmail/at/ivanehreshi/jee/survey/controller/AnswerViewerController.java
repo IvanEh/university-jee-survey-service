@@ -92,12 +92,6 @@ public class AnswerViewerController {
         updateCurrentAnswers();
     }
 
-    public String getStringAnswer(int i) {
-        Answer answer = getAnswer(i);
-        Question q = questions.get(i);
-        return q.decodeAnswer(answer.getAnswer());
-    }
-
     public void changeOrder() {
         filledQuestionnaires.reverse();
         updateCurrentAnswers();

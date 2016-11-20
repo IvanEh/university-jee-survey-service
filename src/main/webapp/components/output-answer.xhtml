@@ -50,7 +50,7 @@
                     <input type="radio" checked="checked" class="t-center" style="margin: 0px"/>
                 </div>
                 <div class="form-control answer-text t-cell-span-remaining">
-                    <h:outputText value="#{answerViewerService.getStringAnswer(it.index)}"/>
+                    <h:outputText value="#{question.decodeAnswer(answer.answer)}"/>
                 </div>
             </div>
         </div>
