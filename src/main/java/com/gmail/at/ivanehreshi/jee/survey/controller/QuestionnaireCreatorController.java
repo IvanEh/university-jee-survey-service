@@ -5,10 +5,12 @@ import com.gmail.at.ivanehreshi.jee.survey.entity.Question;
 import com.gmail.at.ivanehreshi.jee.survey.entity.Questionnaire;
 import com.gmail.at.ivanehreshi.jee.survey.entity.TextQuestion;
 import com.gmail.at.ivanehreshi.jee.survey.persistence.jpa.QuestionnaireJpaDao;
+import com.gmail.at.ivanehreshi.jee.survey.service.AuthService;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import java.util.List;
 
 @ViewScoped
@@ -16,6 +18,10 @@ import java.util.List;
 public class QuestionnaireCreatorController {
     @EJB
     private QuestionnaireJpaDao questionnaireJpaDao;
+
+    @Inject
+    private AuthService authService;
+
     private Questionnaire questionnaire = new Questionnaire();
 
     public void addTextQuestion() {
@@ -51,7 +57,7 @@ public class QuestionnaireCreatorController {
     }
 
     public String save() {
-        System.out.println(questionnaire.getQuestions().size());
+        questionnaire.setAuthor(authService.getCurrentUser());
         questionnaireJpaDao.create(questionnaire);
         return "questionnaire-created?faces-redirect=true&id=" + questionnaire.getId();
     }

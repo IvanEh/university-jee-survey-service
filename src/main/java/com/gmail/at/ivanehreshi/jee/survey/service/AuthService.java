@@ -18,7 +18,7 @@ public class AuthService implements Serializable {
     @EJB
     transient private UserJpaDao userJpaDao;
 
-    transient private User currentUser = null;
+    private User currentUser = null;
 
     public User getCurrentUser() {
         if(currentUser == null) {

@@ -4,11 +4,13 @@ import com.gmail.at.ivanehreshi.jee.survey.entity.Questionnaire;
 import com.gmail.at.ivanehreshi.jee.survey.entity.User;
 import com.gmail.at.ivanehreshi.jee.survey.persistence.jpa.QuestionnaireJpaDao;
 import com.gmail.at.ivanehreshi.jee.survey.persistence.jpa.UserJpaDao;
+import com.gmail.at.ivanehreshi.jee.survey.service.AuthService;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import java.util.List;
 
 @ManagedBean
@@ -20,13 +22,16 @@ public class UserQuestionnairesController {
     @EJB
     private QuestionnaireJpaDao questionnaireJpaDao;
 
+    @Inject
+    private AuthService authService;
+
     private Long userId;
     private User user;
     private List<Questionnaire> questionnaires;
 
     @PostConstruct
     public void init() {
-        userId = 1L;
+        userId = authService.getCurrentUser().getId();
         update();
     }
 
