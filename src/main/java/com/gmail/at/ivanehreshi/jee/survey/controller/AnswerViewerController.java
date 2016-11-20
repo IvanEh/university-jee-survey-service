@@ -54,6 +54,10 @@ public class AnswerViewerController {
     }
 
     public void updateCurrentAnswers() {
+        if(filledQuestionnaires.isEmpty()) {
+            return;
+        }
+
         currentAnswers = filledQuestionnaireDao.findAnswers(getCurrentFilledQuestionnaire().getId());
 
     }
@@ -63,6 +67,10 @@ public class AnswerViewerController {
     }
 
     public void prev() {
+        if(filledQuestionnaires.isEmpty()) {
+            return;
+        }
+
         questionnaireCursor--;
         if(questionnaireCursor <= 0) {
             questionnaireCursor = filledQuestionnaires.size();
@@ -72,6 +80,10 @@ public class AnswerViewerController {
     }
 
     public void next() {
+        if(filledQuestionnaires.isEmpty()) {
+            return;
+        }
+
         questionnaireCursor++;
         if(questionnaireCursor > filledQuestionnaires.size()) {
             questionnaireCursor = 1;

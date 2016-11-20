@@ -90,6 +90,11 @@
             <hr/>
 
             <h:panelGroup id="answers">
+
+                <h:panelGroup rendered="#{answerViewerController.filledQuestionnaires.isEmpty()}">
+                    <strong>На жаль, немає заповнених анкет</strong>
+                </h:panelGroup>
+
                 <ui:repeat value="#{answerViewerController.questions}" var="question" varStatus="it">
                     <c:set var="answer" value="#{answerViewerController.getCurrentAnswers().get(it.index)}"/>
 
