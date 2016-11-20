@@ -8,6 +8,8 @@
             <li class="#{link eq 'home' ? 'active' : ''}"><a href="home.xhtml">Головна</a></li>
             <li class="#{link eq 'new' ? 'active' : ''}"><a href="new-questionnaire.xhtml">Створити Опитування</a></li>
             <li class="#{link eq 'q' ? 'active' : ''}"><a href="my-questionnaires.xhtml">Мої Опитування</a></li>
+            <li class="#{link eq 'all-q' ? 'active' : ''} #{admin eq 'true' ? '' : 'hidden'}"><a href="admin-questionnaires.xhtml">Всі опитування</a></li>
+            <li class="#{link eq 'notif' ? 'active' : ''} #{admin eq 'true' ? '' : 'hidden'}"><a href="logger.xhtml">Події на сервері</a></li>
             <hr/>
             <li class="#{link eq 'ans' ? 'active' : 'hidden'}"><a href="#">Перегляд опитування</a></li>
             <li class="#{link eq 'answers' ? 'active' : 'hidden'}"><a href="#">Перегляд заповнених анкет</a></li>

@@ -15,8 +15,6 @@
     <h:outputStylesheet library="css" name="home.css"/>
     <h:outputScript library="js" name="master.js"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-
-    #{notificationService.notify("Home")}
 </h:head>
 
 <h:body>
@@ -30,11 +28,15 @@
         </ui:include>
 
         <div class="col-md-8 content">
-            <h4>Система анкетнування</h4>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Notification
+                </div>
+                <div class="panel-body">
+                    #{notificationService.receive()}
+                </div>
+            </div>
 
-            <p id="hint">
-                <span class="glyphicon glyphicon-arrow-left"></span> Виберіть дію у боковому меню
-            </p>
         </div>
 
     </div>
