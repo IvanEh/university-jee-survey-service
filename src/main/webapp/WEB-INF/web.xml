@@ -27,6 +27,10 @@
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 
+    <welcome-file-list>
+        <welcome-file>home.xhtml</welcome-file>
+    </welcome-file-list>
+
     <session-config>
         <session-timeout>45</session-timeout>
     </session-config>
@@ -36,7 +40,7 @@
         <realm-name>VacancySecurity</realm-name>
         <form-login-config>
             <form-login-page>/login.xhtml</form-login-page>
-            <form-error-page>/error/login-error.xhtml</form-error-page>
+            <form-error-page>/error.xhtml</form-error-page>
         </form-login-config>
     </login-config>
 
@@ -50,10 +54,26 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Protected Area</web-resource-name>
-            <url-pattern>*.xhtml</url-pattern>
+            <url-pattern>/answers.xhtml</url-pattern>
+            <url-pattern>/home.xhtml</url-pattern>
+            <url-pattern>/my-questionnaires.xhtml</url-pattern>
+            <url-pattern>/new-quesitonnare.xhtml</url-pattern>
+            <url-pattern>/questionnaire-created.xhtml</url-pattern>
+            <url-pattern>/questionnaire-success.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>USER</role-name>
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Protected Area</web-resource-name>
+            <url-pattern>admin-questionnaires.xhtml</url-pattern>
+            <url-pattern>logger.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
             <role-name>ADMIN</role-name>
         </auth-constraint>
     </security-constraint>
