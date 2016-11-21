@@ -106,3 +106,18 @@ a.underlined-link {
     margin-right: 30px;
 }
 
+label.fix-checkbox-label {
+    padding-left: 0px;
+}
+
+.fix-checkbox-box {
+    display: inline-block;
+    width: 97%;
+
+    vertical-align: middle;
+}
+
+input.fix-checkbox-checkbox {
+    display: inline-block;
+    vertical-align: middle;
+}

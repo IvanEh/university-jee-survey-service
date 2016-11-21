@@ -60,5 +60,32 @@
         </div>
     </h:panelGroup>
 
+    <h:panelGroup layout="block" styleClass="question-container panel panel-default" rendered="#{questionHelper.isCheckboxQuestion(question)}">
+        <c:set var="checkboxQuestion" value="${questionHelper.toCheckboxQuestion(question)}"/>
+
+        <div class="panel-heading">
+                        <span class="badge question-num ">
+                            <h:outputText value="${index + 1}"/>
+                        </span>
+            <h:inputText class="form-control" value="${checkboxQuestion.title}"/>
+        </div>
+
+        <div class="panel-body">
+            <ui:repeat value="${checkboxQuestion.choices}" var="choice" varStatus="choiceStatus">
+                <div class="radio">
+                    <label class="fix-checkbox-label"><input type="checkbox" class="fix-checkbox-checkbox"/>
+                        <h:inputText type="text"
+                                     class="form-control fix-checkbox-box"
+                                     value="${checkboxQuestion.choices[choiceStatus.index]}"/>
+                    </label>
+                </div>
+            </ui:repeat>
+
+            <div class="btn-container pull-right">
+                <ui:insert name="button-delete"/>
+                <ui:insert name="button-add-checkbox"/>
+            </div>
+        </div>
+    </h:panelGroup>
 
 </ui:composition>

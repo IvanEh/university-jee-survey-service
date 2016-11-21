@@ -55,7 +55,7 @@ public class Question implements Serializable {
         return answer;
     }
 
-    public String decodeAnswer(String answer) {
+    public Object decodeAnswer(String answer) {
         return null;
     }
 

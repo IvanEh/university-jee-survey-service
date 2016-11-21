@@ -1,9 +1,6 @@
 package com.gmail.at.ivanehreshi.jee.survey.controller;
 
-import com.gmail.at.ivanehreshi.jee.survey.entity.ChoiceQuestion;
-import com.gmail.at.ivanehreshi.jee.survey.entity.Question;
-import com.gmail.at.ivanehreshi.jee.survey.entity.Questionnaire;
-import com.gmail.at.ivanehreshi.jee.survey.entity.TextQuestion;
+import com.gmail.at.ivanehreshi.jee.survey.entity.*;
 import com.gmail.at.ivanehreshi.jee.survey.persistence.jpa.QuestionnaireJpaDao;
 import com.gmail.at.ivanehreshi.jee.survey.service.AuthService;
 
@@ -32,8 +29,16 @@ public class QuestionnaireCreatorController {
         questionnaire.addQuestion(new ChoiceQuestion());
     }
 
+    public void addCheckboxQuestion() {
+        questionnaire.addQuestion(new CheckboxQuestion());
+    }
+
     public void addChoice(ChoiceQuestion choiceQuestion) {
         choiceQuestion.getChoices().add("");
+    }
+
+    public void addCheckbox(CheckboxQuestion checkboxQuestion) {
+        checkboxQuestion.getChoices().add("");
     }
 
     public void removeQuestion(Question q) {

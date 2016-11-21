@@ -58,4 +58,32 @@
 
         </h:panelGroup>
 
+        <h:panelGroup layout="block" styleClass="question-container panel panel-default"
+                      rendered="${questionHelper.isCheckboxQuestion(question)}">
+            <c:set var="checkboxQuestion" value="${questionHelper.toCheckboxQuestion(question)}"/>
+            <h:inputText value="#{answer.answer}" p:id="checkbox-#{status.index}" style="display:none"/>
+
+            <div class="panel-heading">
+                                <span class="badge question-num ">
+                                    <h:outputText value="${status.index + 1}"/>
+                                </span>
+                <h4>
+                    <h:outputText value="${checkboxQuestion.title}"/>
+                </h4>
+            </div>
+
+            <div class="panel-body">
+                <ui:repeat value="${checkboxQuestion.choices}" var="choice" varStatus="choiceStatus">
+                    <div class="radio">
+                        <label class="fix-checkbox-label">
+                            <input type="checkbox" class="fix-checkbox-checkbox"
+                                   onchange="inputChooseManyQuestion(${status.index}, #{choiceStatus.index})"/>
+                            <h:outputText value="${choice}" class="form-control fix-checkbox-box"/>
+                        </label>
+                    </div>
+                </ui:repeat>
+            </div>
+
+        </h:panelGroup>
+
 </ui:composition>

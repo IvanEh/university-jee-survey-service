@@ -1,5 +1,6 @@
 package com.gmail.at.ivanehreshi.jee.survey.util;
 
+import com.gmail.at.ivanehreshi.jee.survey.entity.CheckboxQuestion;
 import com.gmail.at.ivanehreshi.jee.survey.entity.ChoiceQuestion;
 import com.gmail.at.ivanehreshi.jee.survey.entity.Question;
 import com.gmail.at.ivanehreshi.jee.survey.entity.TextQuestion;
@@ -26,4 +27,11 @@ public class QuestionHelper {
         return (TextQuestion) textQuestion;
     }
 
+    public boolean isCheckboxQuestion(Question question) {
+        return question.getClass().equals(CheckboxQuestion.class);
+    }
+
+    public CheckboxQuestion toCheckboxQuestion(Question question) {
+        return (CheckboxQuestion) question;
+    }
 }

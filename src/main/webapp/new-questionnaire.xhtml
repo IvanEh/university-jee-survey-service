@@ -64,17 +64,28 @@
                                     <f:ajax render="@form" execute="@form"/>
                                 </h:commandButton>
                             </ui:define>
+
+                            <ui:define name="button-add-checkbox">
+                                <h:commandButton styleClass="btn" value="+" action="#{questionnaireCreatorController.addCheckbox(checkboxQuestion)}">
+                                    <f:ajax render="@form" execute="@form"/>
+                                </h:commandButton>
+                            </ui:define>
+
                         </ui:decorate>
                     </ui:repeat>
                 </h:panelGroup>
 
 
                 <div class="btn-container">
-                    <h:commandLink styleClass="btn" value="+Текст" action="#{questionnaireCreatorController.addTextQuestion()}">
+                    <h:commandLink styleClass="btn" value="+Text" action="#{questionnaireCreatorController.addTextQuestion()}">
                         <f:ajax render="questions" execute="@form"/>
                     </h:commandLink>
 
-                    <h:commandLink styleClass="btn" value="+Вибір" action="#{questionnaireCreatorController.addChoiceQuestion()}">
+                    <h:commandLink styleClass="btn" value="+Radio" action="#{questionnaireCreatorController.addChoiceQuestion()}">
+                        <f:ajax render="questions" execute="@form"/>
+                    </h:commandLink>
+
+                    <h:commandLink styleClass="btn" value="+Checkbox" action="#{questionnaireCreatorController.addCheckboxQuestion()}">
                         <f:ajax render="questions" execute="@form"/>
                     </h:commandLink>
                 </div>
