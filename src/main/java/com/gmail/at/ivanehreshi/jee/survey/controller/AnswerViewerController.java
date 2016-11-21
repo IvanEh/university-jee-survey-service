@@ -20,6 +20,8 @@ import java.util.Map;
 @ManagedBean
 @ViewScoped
 public class AnswerViewerController {
+    private static final FilledQuestionnaire EMPTY_QUESTIONNAIRE = new FilledQuestionnaire();
+
     @EJB
     private FilledQuestionnaireDao filledQuestionnaireDao;
 
@@ -112,6 +114,9 @@ public class AnswerViewerController {
     }
 
     public FilledQuestionnaire getCurrentFilledQuestionnaire() {
+        if(filledQuestionnaires.isEmpty()) {
+            return EMPTY_QUESTIONNAIRE;
+        }
         return filledQuestionnaires.get(questionnaireCursor - 1);
     }
 
