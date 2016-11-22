@@ -2,6 +2,7 @@ package com.gmail.at.ivanehreshi.jee.survey.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,10 +26,10 @@ public class User implements Serializable {
     @ElementCollection
     @JoinTable(joinColumns = @JoinColumn(referencedColumnName = "username", name = "username"),
                name = "Role")
-    private List<String> roles;
+    private List<String> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "author")
-    private List<Questionnaire> questionnaires;
+    private List<Questionnaire> questionnaires = new ArrayList<>();
 
     public User() {
     }
@@ -83,5 +84,13 @@ public class User implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 }
