@@ -47,6 +47,10 @@ public class AuthService implements Serializable {
         return getRequest().isUserInRole("ADMIN");
     }
 
+    public boolean isLoggedIn() {
+        return getRequest().getUserPrincipal() != null;
+    }
+
     private HttpServletRequest getRequest() {
         return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
     }

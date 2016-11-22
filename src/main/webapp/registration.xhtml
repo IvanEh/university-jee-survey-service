@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xsi:schemaLocation="http://xmlns.jcp.org/jsf/html http://xmlns.jcp.org/ns/jsf/html"
+>
+<h:head>
+    <title>Title</title>
+    <h:outputStylesheet library="bower_components" name="bootstrap/dist/css/bootstrap.css"/>
+    <h:outputStylesheet library="css" name="master.css"/>
+    <h:outputStylesheet library="css" name="home.css"/>
+    <h:outputScript library="js" name="master.js"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</h:head>
+
+<h:body>
+
+    <ui:include src="components/navbar.xhtml"/>
+
+    <div class="container-fluid">
+
+        <div class="col-md-6 col-md-offset-3 content">
+            <h1>Вхід</h1>
+
+            <h:form class="form">
+                <h:messages styleClass="hidden"></h:messages>
+
+                <div class="form-group #{lastNameUi.valid ? '' : 'has-error'}">
+                    <label>Прізвище</label>
+                    <h:inputText value="#{registrationController.user.firstName}"
+                                 styleClass="form-control"
+                                 binding="#{lastNameUi}">
+                        <f:validateLength minimum="3"/>
+                    </h:inputText>
+                </div>
+
+                <div class="form-group #{firstNameUi.valid ? '' : 'has-error'}">
+                    <label>Ім'я</label>
+                    <h:inputText value="#{registrationController.user.lastName}"
+                                 styleClass="form-control"
+                                 binding="#{firstNameUi}">
+                        <f:validateLength minimum="3"/>
+                    </h:inputText>
+                </div>
+
+                <div class="form-group #{userNameUi.valid ? '' : 'has-error'}">
+                    <label>Ім'я користувача</label>
+                    <h:inputText value="#{registrationController.user.username}"
+                                 styleClass="form-control"
+                                 binding="#{userNameUi}"
+                        >
+                        <f:validator validatorId="usernameValidator"/>
+                    </h:inputText>
+                </div>
+
+                <div class="form-group #{passwordUi.valid ? '' : 'has-error'}">
+                    <label for="pwd">Password:</label>
+                    <h:inputSecret value="#{registrationController.user.password}"
+                                   styleClass="form-control"
+                                   binding="#{passwordUi}" >
+                            <f:validateLength minimum="4"/>
+                    </h:inputSecret>
+                </div>
+                <h:commandButton action="#{registrationController.register()}"
+                                 styleClass="btn btn-default" value="Зареєструватися"/>
+            </h:form>
+        </div>
+
+    </div>
+
+
+    <h:outputScript library="bower_components" name="jquery/dist/jquery.js"/>
+
+</h:body>
+</html>

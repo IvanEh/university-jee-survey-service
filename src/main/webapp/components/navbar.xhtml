@@ -1,5 +1,6 @@
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:ui="http://java.sun.com/jsf/facelets"
 >
 
@@ -10,6 +11,14 @@
                     Survey Service
                 </a>
             </div>
+
+            <h:panelGroup class="navbar-collapse collapse"
+                          rendered="#{not authService.isLoggedIn()}">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="login.xhtml">Ввійти</a></li>
+                    <li><a href="registration.xhtml">Реєстрація</a></li>
+                </ul>
+            </h:panelGroup>
         </div>
     </nav>
 
