@@ -16,7 +16,7 @@
             <li class="#{link eq 'ans' ? 'active' : 'hidden'}"><a href="#">Перегляд опитування</a></li>
             <li class="#{link eq 'answers' ? 'active' : 'hidden'}"><a href="#">Перегляд заповнених анкет</a></li>
             <li class="#{link eq 'logout' ? 'active' :''}">
-                    <h:commandLink action="#{authService.logout()}" outcome="home" value="Вийти"/>
+                    <h:commandLink action="#{authController.logout()}" outcome="home" value="Вийти"/>
             </li>
         </ul>
         </h:form>

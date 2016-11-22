@@ -13,13 +13,6 @@ public class TextQuestion extends Question implements Serializable {
     }
 
     @Override
-    public Answer newAnswer() {
-        Answer answer = new TextQuestionAnswer();
-        answer.setQuestion(this);
-        return answer;
-    }
-
-    @Override
     public String decodeAnswer(String answer) {
         return answer;
     }

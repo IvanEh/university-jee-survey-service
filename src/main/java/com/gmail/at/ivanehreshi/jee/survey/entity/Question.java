@@ -49,7 +49,7 @@ public class Question implements Serializable {
         this.title = title;
     }
 
-    public Answer newAnswer() {
+    public final Answer newAnswer() {
         Answer answer = new Answer();
         answer.setQuestion(this);
         return answer;

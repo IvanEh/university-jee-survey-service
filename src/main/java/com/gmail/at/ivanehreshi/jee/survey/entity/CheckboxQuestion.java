@@ -12,13 +12,6 @@ public class CheckboxQuestion extends Question {
     private List<String> choices = new ArrayList<>();
 
     @Override
-    public Answer newAnswer() {
-        Answer answer = new Answer();
-        answer.setQuestion(this);
-        return answer;
-    }
-
-    @Override
     public List<String> decodeAnswer(String answer) {
         String[] indices = answer.split(",");
         List<String> results = new ArrayList<>();

@@ -24,13 +24,6 @@ public class ChoiceQuestion extends Question implements Serializable {
     }
 
     @Override
-    public Answer newAnswer() {
-        Answer answer = new ChoiceQuestionAnswer();
-        answer.setQuestion(this);
-        return answer;
-    }
-
-    @Override
     public String decodeAnswer(String answer) {
         int index = Integer.valueOf(answer);
 
