@@ -2,6 +2,8 @@ package com.gmail.at.ivanehreshi.jee.survey.service;
 
 import com.gmail.at.ivanehreshi.jee.survey.entity.User;
 import com.gmail.at.ivanehreshi.jee.survey.persistence.jpa.UserJpaDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -15,6 +17,8 @@ import java.security.Principal;
 @Named
 @SessionScoped
 public class AuthService implements Serializable {
+    private static Logger LOGGER = LogManager.getLogger(AuthService.class);
+
     @EJB
     transient private UserJpaDao userJpaDao;
 
@@ -39,7 +43,7 @@ public class AuthService implements Serializable {
         try {
             getRequest().logout();
         } catch (ServletException e) {
-            e.printStackTrace();
+            LOGGER.warn("Cannot perform user logout", e);
         }
     }
 

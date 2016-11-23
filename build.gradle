@@ -16,6 +16,7 @@ dependencies {
     compile "javax.ejb:javax.ejb-api:3.2"
     compile "javax.jms:javax.jms-api:2.0.1"
     compile "javax.enterprise:cdi-api:1.2"
+    compile "org.apache.logging.log4j:log4j-core:2.7"
 }
 
 

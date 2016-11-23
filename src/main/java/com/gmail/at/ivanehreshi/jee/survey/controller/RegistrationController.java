@@ -2,6 +2,8 @@ package com.gmail.at.ivanehreshi.jee.survey.controller;
 
 import com.gmail.at.ivanehreshi.jee.survey.entity.User;
 import com.gmail.at.ivanehreshi.jee.survey.persistence.jpa.UserJpaDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -13,6 +15,8 @@ import java.util.Base64;
 @ManagedBean
 @ViewScoped
 public class RegistrationController {
+    private static Logger LOGGER = LogManager.getLogger(RegistrationController.class);
+
     @EJB
     private UserJpaDao userJpaDao;
 
@@ -31,7 +35,7 @@ public class RegistrationController {
         try {
             md = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            LOGGER.error("Cannot find digest algorithm. Registration will not work",e);
         }
         byte[] passwordBytes = password.getBytes();
         byte[] hash = md.digest(passwordBytes);

@@ -1,5 +1,8 @@
 package com.gmail.at.ivanehreshi.jee.survey.jms;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -12,6 +15,8 @@ import javax.jms.Topic;
 @Stateless
 @Named
 public class NotificationService {
+    private static Logger LOGGER = LogManager.getLogger(NotificationService.class);
+
     @Resource(lookup = "java:/SurveyTopic")
     private Topic topic;
 
@@ -23,7 +28,7 @@ public class NotificationService {
         try {
             jmsContext.createProducer().send(topic, message);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.warn("Exception while producing notification", e);
         }
     }
 
@@ -32,10 +37,9 @@ public class NotificationService {
             JMSConsumer consumer = jmsContext.createConsumer(topic);
             return consumer.receive().getBody(String.class);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.warn("Exception while consuming notification", e);
+            return null;
         }
-
-        return null;
     }
 
     public JMSContext getJmsContext() {
